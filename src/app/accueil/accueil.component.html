@@ -10,6 +10,14 @@
     />
   </div>
 
+  <!-- Sélecteur de vue : Toutes les recettes / Mes recettes -->
+  <div class="mb-4 d-flex justify-content-center">
+    <select [(ngModel)]="affichageUtilisateur" class="form-select w-50">
+      <option [ngValue]="false">Toutes les Recettes</option>
+      <option [ngValue]="true">Mes Recettes</option>
+    </select>
+  </div>
+
   <!-- Filtre de Catégorie -->
   <div class="mb-4 d-flex justify-content-center">
     <select [(ngModel)]="categorieFiltre" class="form-select w-50">
@@ -17,7 +25,7 @@
       <option *ngFor="let categorie of categories" [value]="categorie">{{ categorie }}</option>
     </select>
   </div>
-
+  
   <div class="row">
     <div *ngFor="let recette of recettesPaginees" class="col-md-6 col-lg-4 mb-4">
       <div class="card shadow-sm">

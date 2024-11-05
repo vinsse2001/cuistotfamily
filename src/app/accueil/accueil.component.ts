@@ -20,13 +20,15 @@ export class AccueilComponent implements OnInit {
   recettesParPage: number = 6;
   categories: string[] = [];
   categorieFiltre: string = '';
+  affichageUtilisateur: boolean = false;
+  utilisateurId: number = 1;
 
   constructor(private recetteService: RecetteService,
               private categorieService: CategorieService) {}
 
   ngOnInit() {
-  this.categories = this.categorieService.obtenirCategories();
-   this.recetteService.recettes$.subscribe(recettes => (this.recettes = recettes));
+    this.categories = this.categorieService.obtenirCategories();
+    this.recetteService.recettes$.subscribe(recettes => (this.recettes = recettes));
   }
 
   filteredRecettes(): Recette[] {
@@ -40,9 +42,13 @@ export class AccueilComponent implements OnInit {
   }
 
   get recettesFiltrees(): Recette[] {
-    return this.categorieFiltre
+    const recettesFiltrees = this.categorieFiltre
       ? this.recettes.filter(recette => recette.categorie === this.categorieFiltre)
       : this.recettes;
+
+    return this.affichageUtilisateur
+      ? recettesFiltrees.filter(recette => recette.utilisateurId === this.utilisateurId)
+      : recettesFiltrees;
   }
 
   get recettesPaginees(): Recette[] {

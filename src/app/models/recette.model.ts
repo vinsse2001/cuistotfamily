@@ -7,5 +7,6 @@ export interface Recette {
     tempsCuisson: number; // Temps en minutes
     portions: number; // Nombre de portions
     categorie: string;
+    utilisateurId: number;
   }
   
