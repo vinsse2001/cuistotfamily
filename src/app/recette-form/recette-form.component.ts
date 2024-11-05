@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RecetteService } from '../services/recette.service';
 import { Recette } from '../models/recette.model';
+import { CategorieService } from '../services/categorie.service';
 
 interface NouvelleRecetteForm {
   titre: string;
@@ -25,6 +26,7 @@ interface NouvelleRecetteForm {
 })
 export class RecetteFormComponent implements OnInit {
   @ViewChild('recetteForm') recetteForm!: NgForm;
+  categories: string[] = [];
   nouvelleRecette: NouvelleRecetteForm = {
     titre: '',
     ingredients: '',
@@ -41,10 +43,13 @@ export class RecetteFormComponent implements OnInit {
   constructor(
     private recetteService: RecetteService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private categorieService: CategorieService
   ) {}
 
   ngOnInit() {
+    this.categories = this.categorieService.obtenirCategories();
+    
     // Récupère l'ID de la recette à partir de l'URL (s'il est présent)
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {

@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { RecetteService } from '../services/recette.service';
 import { Recette } from '../models/recette.model';
 import { FormsModule } from '@angular/forms';
+import { CategorieService } from '../services/categorie.service';
 
 @Component({
   selector: 'app-accueil',
@@ -17,11 +18,14 @@ export class AccueilComponent implements OnInit {
   searchTerm: string = '';
   currentPage: number = 1;
   recettesParPage: number = 6;
+  categories: string[] = [];
   categorieFiltre: string = '';
 
-  constructor(private recetteService: RecetteService) {}
+  constructor(private recetteService: RecetteService,
+              private categorieService: CategorieService) {}
 
   ngOnInit() {
+  this.categories = this.categorieService.obtenirCategories();
    this.recetteService.recettes$.subscribe(recettes => (this.recettes = recettes));
   }
 

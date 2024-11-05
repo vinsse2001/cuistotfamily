@@ -14,9 +14,7 @@
   <div class="mb-4 d-flex justify-content-center">
     <select [(ngModel)]="categorieFiltre" class="form-select w-50">
       <option value="">Toutes les catégories</option>
-      <option value="Entrée">Entrée</option>
-      <option value="Plat">Plat</option>
-      <option value="Dessert">Dessert</option>
+      <option *ngFor="let categorie of categories" [value]="categorie">{{ categorie }}</option>
     </select>
   </div>
 

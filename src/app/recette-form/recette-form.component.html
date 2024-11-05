@@ -110,9 +110,7 @@
       <label for="categorie" class="form-label">Catégorie</label>
       <select id="categorie" class="form-control" [(ngModel)]="nouvelleRecette.categorie" name="categorie" required>
         <option value="" disabled selected>Sélectionnez une catégorie</option>
-        <option value="Entrée">Entrée</option>
-        <option value="Plat">Plat</option>
-        <option value="Dessert">Dessert</option>
+        <option *ngFor="let categorie of categories" [value]="categorie">{{ categorie }}</option>
       </select>
       <div *ngIf="recetteForm.submitted && !recetteForm.controls['categorie']?.valid" class="text-danger">
         La catégorie est requise
