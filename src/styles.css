@@ -1,0 +1,116 @@
+/* Couleurs de base */
+:root {
+    --vert-doux: #BDD9C2;
+    --vert-gris: #E2EDE4;
+    --rose-saumon-clair: #FFF4F3;
+    --rose-saumon: #FFE0DE;
+    --gris-fonce: #4A4A4A;
+    --blanc: #FFFFFF;
+  }
+  
+  /* Fond de page et texte global */
+  body {
+    background-color: var(--vert-gris); /* Fond vert clair pour la page principale */
+    color: var(--gris-fonce); /* Texte gris foncé pour un bon contraste */
+    font-family: Arial, sans-serif;
+    margin: 0;
+  }
+  
+  /* Barre de navigation */
+  .navbar {
+    background-color: var(--rose-saumon-clair) !important; /* Fond rose saumon clair pour la barre */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre douce */
+  }
+  
+  .navbar-brand img {
+    height: 40px;
+    margin-right: 10px;
+  }
+  
+  .navbar .nav-link {
+    color: var(--gris-fonce) !important;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+  
+  .navbar .nav-link:hover {
+    color: var(--blanc) !important; /* Blanc au survol */
+  }
+  
+  /* Boutons */
+  .btn-primary {
+    background-color: var(--vert-doux); /* Vert doux pour les boutons principaux */
+    border-color: var(--vert-doux);
+    color: var(--gris-fonce); /* Texte gris foncé */
+  }
+  
+  .btn-primary:hover {
+    background-color: #A3C3A4; /* Vert légèrement plus foncé pour le survol */
+    border-color: #A3C3A4;
+  }
+  
+  .btn-secondary {
+    background-color: var(--rose-saumon); /* Rose saumon pour les boutons secondaires */
+    color: var(--gris-fonce); /* Texte gris foncé */
+    border-color: var(--rose-saumon);
+  }
+  
+  .btn-secondary:hover {
+    background-color: #FFCCCC; /* Rose saumon plus intense au survol */
+    color: var(--gris-fonce);
+  }
+  
+  /* Style des cartes ou blocs de contenu */
+  .card {
+    background-color: var(--blanc);
+    border: 1px solid var(--vert-gris);
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 15px;
+  }
+  
+  .card h2 {
+    color: var(--gris-fonce);
+  }
+  
+  .card p {
+    color: var(--gris-fonce);
+    line-height: 1.6;
+  }
+  
+  /* Style des formulaires */
+  form {
+    background-color: var(--blanc);
+    border: 1px solid var(--vert-gris);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 600px;
+  }
+  
+  form label {
+    color: var(--gris-fonce);
+    font-weight: bold;
+  }
+  
+  form input,
+  form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid var(--vert-gris);
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  /* Styles pour les titres */
+  h1, h2, h3 {
+    color: var(--gris-fonce);
+  }
+  
+  /* Espacement et alignement des éléments */
+  .container {
+    padding: 15px;
+  }
+  

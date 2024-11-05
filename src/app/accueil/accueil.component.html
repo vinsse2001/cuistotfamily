@@ -1,0 +1,60 @@
+<div class="container mt-4">
+  <h1 class="text-center mb-4">Nos Recettes</h1>
+  <!-- Barre de recherche -->
+  <div class="mb-4">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      class="form-control"
+      placeholder="Rechercher une recette par titre ou ingrédient..."
+    />
+  </div>
+
+  <!-- Filtre de Catégorie -->
+  <div class="mb-4 d-flex justify-content-center">
+    <select [(ngModel)]="categorieFiltre" class="form-select w-50">
+      <option value="">Toutes les catégories</option>
+      <option value="Entrée">Entrée</option>
+      <option value="Plat">Plat</option>
+      <option value="Dessert">Dessert</option>
+    </select>
+  </div>
+
+  <div class="row">
+    <div *ngFor="let recette of recettesPaginees" class="col-md-6 col-lg-4 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">{{ recette.titre }}</h5>
+          <p class="card-text">
+            <strong>Catégorie :</strong> {{ recette.categorie }}
+            <br>
+            <strong>Préparation :</strong> {{ recette.tempsPreparation }} min<br>
+            <strong>Cuisson :</strong> {{ recette.tempsCuisson }} min<br>
+            <strong>Portions :</strong> {{ recette.portions }}
+          </p>
+          <p class="card-text">
+            {{ recette.instructions | slice:0:100 }}...
+          </p>
+          <a [routerLink]="['/recette', recette.id]" class="btn btn-primary">Voir la Recette</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Pagination -->
+    <nav class="d-flex justify-content-center mt-4">
+      <ul class="pagination">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <a class="page-link" (click)="changerPage(currentPage - 1)">Précédent</a>
+        </li>
+  
+        <li class="page-item" *ngFor="let page of [].constructor(nombrePages); let i = index" [class.active]="currentPage === i + 1">
+          <a class="page-link" (click)="changerPage(i + 1)">{{ i + 1 }}</a>
+        </li>
+  
+        <li class="page-item" [class.disabled]="currentPage === nombrePages">
+          <a class="page-link" (click)="changerPage(currentPage + 1)">Suivant</a>
+        </li>
+      </ul>
+    </nav>
+</div>

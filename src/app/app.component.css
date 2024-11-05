@@ -1,0 +1,15 @@
+.logo {
+  height: 80px; /* Ajuste la taille selon tes préférences */
+  max-height: 80px;
+  width: auto;
+  margin-right: 10px; /* Espace entre le logo et les liens de navigation */
+}
+
+.navbar .nav-link {
+  font-size: 1rem; /* Taille de police pour les liens, ajuste si nécessaire */
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center; /* Aligne le logo avec les liens de navigation */
+}

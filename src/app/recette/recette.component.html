@@ -1,0 +1,22 @@
+<div *ngIf="recette">
+    <h2>{{ recette.titre }}</h2>
+    <p><strong>Portions :</strong> {{ recette.portions }}</p>
+    <p><strong>Temps de préparation :</strong> {{ recette.tempsPreparation }} minutes</p>
+    <p><strong>Temps de cuisson :</strong> {{ recette.tempsCuisson }} minutes</p>
+    <p><strong>Ingrédients :</strong></p>
+    <ul>
+        <li *ngFor="let ingredient of recette.ingredients">{{ ingredient }}</li>
+    </ul>
+    <p><strong>Instructions :</strong></p>
+    <div *ngFor="let paragraph of getParagraphs(recette.instructions)">
+      <p class="instructions">{{ paragraph }}</p>
+    </div>
+    <a [routerLink]="['/recette', recette.id, 'edit']" class="btn btn-primary mt-3">Modifier la Recette</a>
+    <button (click)="supprimerRecette()" class="btn btn-danger mt-3 ms-2">Supprimer la Recette</button>  
+</div>
+<div *ngIf="!recette">
+    <p>Recette introuvable.</p>
+</div>
+
+
+

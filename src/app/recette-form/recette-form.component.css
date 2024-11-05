@@ -1,0 +1,17 @@
+input.ng-dirty.ng-invalid,
+textarea.ng-dirty.ng-invalid {
+  border-color: #ff6b6b;
+  box-shadow: 0 0 5px rgba(255, 107, 107, 0.5);
+}
+
+input.ng-dirty.ng-valid,
+textarea.ng-dirty.ng-valid {
+  border-color: #4CAF50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border-color: #ff6b6b; /* Rouge pour indiquer une erreur */
+  box-shadow: 0 0 5px rgba(255, 107, 107, 0.5);
+}

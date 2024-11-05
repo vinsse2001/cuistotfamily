@@ -1,0 +1,125 @@
+<div *ngIf="messageConfirmation" class="alert alert-success" role="alert">
+    {{ messageConfirmation }}
+</div>
+  
+  <form #recetteForm="ngForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
+    <!-- Champ Titre -->
+    <div class="mb-3">
+      <label for="titre" class="form-label">Titre</label>
+      <input
+        type="text"
+        id="titre"
+        class="form-control"
+        [(ngModel)]="nouvelleRecette.titre"
+        name="titre"
+        required
+        placeholder="Ex : Tarte aux pommes"
+      />
+      <div *ngIf="recetteForm.controls['titre']?.invalid && recetteForm.controls['titre']?.touched" class="text-danger">
+        Le titre est requis
+      </div>
+    </div>
+  
+    <!-- Champ Ingrédients -->
+    <div class="mb-3">
+      <label for="ingredients" class="form-label">Ingrédients</label>
+      <textarea
+        id="ingredients"
+        class="form-control"
+        [(ngModel)]="nouvelleRecette.ingredients"
+        name="ingredients"
+        required
+        placeholder="Listez les ingrédients, séparés par des virgules"
+      ></textarea>
+      <div *ngIf="recetteForm.controls['ingredients']?.invalid && recetteForm.controls['ingredients']?.touched" class="text-danger">
+        Les ingrédients sont requis
+      </div>
+    </div>
+  
+    <!-- Champ Instructions -->
+    <div class="mb-3">
+      <label for="instructions" class="form-label">Instructions</label>
+      <textarea
+        id="instructions"
+        class="form-control"
+        [(ngModel)]="nouvelleRecette.instructions"
+        name="instructions"
+        required
+        placeholder="Décrivez chaque étape de la recette"
+      ></textarea>
+      <div *ngIf="recetteForm.controls['instructions']?.invalid && recetteForm.controls['instructions']?.touched" class="text-danger">
+        Les instructions sont requises
+      </div>
+    </div>
+  
+    <!-- Champ Temps de Préparation -->
+    <div class="mb-3">
+      <label for="tempsPreparation" class="form-label">Temps de Préparation (minutes)</label>
+      <input
+        type="number"
+        id="tempsPreparation"
+        class="form-control"
+        [(ngModel)]="nouvelleRecette.tempsPreparation"
+        name="tempsPreparation"
+        min="1"
+        required
+        placeholder="Ex : 20"
+      />
+      <div *ngIf="recetteForm.controls['tempsPreparation']?.errors?.['min'] && recetteForm.controls['tempsPreparation']?.touched" class="text-danger">
+        Le temps de préparation doit être supérieur à zéro
+      </div>
+    </div>
+  
+    <!-- Champ Temps de Cuisson -->
+    <div class="mb-3">
+      <label for="tempsCuisson" class="form-label">Temps de Cuisson (minutes)</label>
+      <input
+        type="number"
+        id="tempsCuisson"
+        class="form-control"
+        [(ngModel)]="nouvelleRecette.tempsCuisson"
+        name="tempsCuisson"
+        min="0"
+        placeholder="Ex : 30"
+      />
+      <div *ngIf="recetteForm.controls['tempsCuisson']?.errors?.['min'] && recetteForm.controls['tempsCuisson']?.touched" class="text-danger">
+        Le temps de cuisson doit être positif
+      </div>
+    </div>
+  
+    <!-- Champ Portions -->
+    <div class="mb-3">
+      <label for="portions" class="form-label">Portions</label>
+      <input
+        type="number"
+        id="portions"
+        class="form-control"
+        [(ngModel)]="nouvelleRecette.portions"
+        name="portions"
+        min="1"
+        required
+        placeholder="Ex : 4"
+      />
+      <div *ngIf="recetteForm.controls['portions']?.errors?.['min'] && recetteForm.controls['portions']?.touched" class="text-danger">
+        Les portions doivent être au moins de 1
+      </div>
+    </div>
+    
+    <!-- Champ de Catégorie -->
+    <div class="mb-3">
+      <label for="categorie" class="form-label">Catégorie</label>
+      <select id="categorie" class="form-control" [(ngModel)]="nouvelleRecette.categorie" name="categorie" required>
+        <option value="" disabled selected>Sélectionnez une catégorie</option>
+        <option value="Entrée">Entrée</option>
+        <option value="Plat">Plat</option>
+        <option value="Dessert">Dessert</option>
+      </select>
+      <div *ngIf="recetteForm.submitted && !recetteForm.controls['categorie']?.valid" class="text-danger">
+        La catégorie est requise
+      </div>
+    </div>
+
+    <!-- Bouton de soumission -->
+    <button type="button" class="btn btn-primary w-100" (click)="onSubmit()">Ajouter la Recette</button>
+  </form>
+  
