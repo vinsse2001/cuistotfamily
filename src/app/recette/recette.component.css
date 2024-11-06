@@ -1,5 +1,109 @@
-.instructions p {
-  margin-bottom: 10px;
+/* Structure générale */
+.recette-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.recette-titre {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.recette-infos {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
   font-size: 1rem;
-  line-height: 1.5;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.recette-infos i {
+  margin-right: 5px;
+}
+
+.recette-contenu {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+/* Flexbox pour disposer l'image et le contenu textuel */
+.recette-contenu-flex {
+  display: flex;
+  gap: 20px;
+}
+
+.recette-texte {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.recette-ingredients {
+  margin-bottom: 20px;
+}
+
+.recette-ingredients h2 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.recette-ingredients ul {
+  padding-left: 20px;
+}
+
+/* Style de l'image avec dimensionnement limité */
+.recette-image {
+  max-width: 250px;
+  width: 100%;
+  flex-shrink: 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.recette-image img {
+  width: 100%;
+  height: auto;
+}
+
+/* Conteneur des instructions qui passe sur toute la largeur */
+.recette-instructions-container {
+  grid-column: 1 / -1; /* Etend sur toute la largeur */
+  margin-top: 20px;
+}
+
+.recette-instructions {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #444;
+  /* Permet aux instructions de s'étendre sous l'image si nécessaire */
+  flex-grow: 1;
+}
+
+.recette-instructions h2 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.recette-instructions p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #444;
+}
+
+/* Boutons d'action */
+.recette-actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
 }

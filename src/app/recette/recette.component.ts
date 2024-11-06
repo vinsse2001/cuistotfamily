@@ -31,10 +31,20 @@ export class RecetteComponent implements OnInit {
     return text.split('\n').filter(paragraph => paragraph.trim().length > 0);
   }
 
+  modifierRecette() {
+    if (this.recette) {
+      this.router.navigate(['/recette', this.recette.id, 'edit']);
+    }
+  }
+
   supprimerRecette() {
     if (this.recette && confirm('Voulez-vous vraiment supprimer cette recette ?')) {
       this.recetteService.supprimerRecette(this.recette.id);
       this.router.navigate(['/']); // Redirection vers l'accueil après suppression
     }
   }
+
+  imprimerRecette() {
+    window.print();
+  } 
 }

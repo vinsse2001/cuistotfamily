@@ -1,22 +1,47 @@
 <div *ngIf="recette">
-    <h2>{{ recette.titre }}</h2>
-    <p><strong>Portions :</strong> {{ recette.portions }}</p>
-    <p><strong>Temps de préparation :</strong> {{ recette.tempsPreparation }} minutes</p>
-    <p><strong>Temps de cuisson :</strong> {{ recette.tempsCuisson }} minutes</p>
-    <p><strong>Ingrédients :</strong></p>
-    <ul>
-        <li *ngFor="let ingredient of recette.ingredients">{{ ingredient }}</li>
-    </ul>
-    <p><strong>Instructions :</strong></p>
-    <div *ngFor="let paragraph of getParagraphs(recette.instructions)">
-      <p class="instructions">{{ paragraph }}</p>
+    <div class="recette-container">
+        <h1 class="recette-titre">{{ recette.titre }}</h1>
+
+        <!-- Section des icônes pour portions et temps -->
+        <div class="recette-infos">
+            <span class="recette-portion">
+                <i class="fa fa-users"></i> {{ recette.portions }} portions
+            </span>
+            <span class="recette-temps">
+                <i class="fa fa-clock"></i> Préparation : {{ recette.tempsPreparation }} min
+            </span>
+            <span class="recette-temps">
+                <i class="fa fa-clock"></i> Cuisson : {{ recette.tempsCuisson }} min
+            </span>
+        </div>
+
+        <!-- Flexbox pour l'affichage des ingrédients, instructions, et image -->
+        <div class="recette-contenu-flex">
+            <div class="recette-texte">
+            <div class="recette-ingredients">
+                <h2>Ingrédients</h2>
+                <ul>
+                <li *ngFor="let ingredient of recette.ingredients">{{ ingredient }}</li>
+                </ul>
+            </div>
+            <div class="recette-instructions">
+                <h2>Instructions</h2>
+                <p>{{ recette.instructions }}</p>
+            </div>
+            </div>
+            <div class="recette-image">
+            <img *ngIf="recette.imageUrl" [src]="recette.imageUrl" alt="{{ recette.titre }}" />
+            </div>
+        </div>
+
+        <!-- Boutons : Imprimer, Modifier, Supprimer -->
+        <div class="recette-actions">
+            <button (click)="imprimerRecette()" class="btn btn-secondary">Imprimer</button>
+            <button (click)="modifierRecette()" class="btn btn-primary">Modifier</button>
+            <button (click)="supprimerRecette()" class="btn btn-danger">Supprimer</button>
+        </div>
     </div>
-    <a [routerLink]="['/recette', recette.id, 'edit']" class="btn btn-primary mt-3">Modifier la Recette</a>
-    <button (click)="supprimerRecette()" class="btn btn-danger mt-3 ms-2">Supprimer la Recette</button>  
 </div>
 <div *ngIf="!recette">
     <p>Recette introuvable.</p>
 </div>
-
-
-
