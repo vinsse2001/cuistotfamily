@@ -73,6 +73,11 @@
 .recette-image img {
   width: 100%;
   height: auto;
+  float: right; /* Fait flotter l'image à droite pour l'habillage du texte */
+  margin-left: 20px; /* Espace entre le texte et l'image */
+  max-width: 250px; /* Largeur max de l'image */
+  border: 1px solid #ddd;
+  border-radius: 8px;
 }
 
 /* Conteneur des instructions qui passe sur toute la largeur */
@@ -98,6 +103,7 @@
   font-size: 1rem;
   line-height: 1.6;
   color: #444;
+  text-align: justify;
 }
 
 /* Boutons d'action */

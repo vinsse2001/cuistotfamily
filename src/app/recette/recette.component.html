@@ -25,13 +25,12 @@
                 </ul>
             </div>
             <div class="recette-instructions">
+                <div class="recette-image">
+                  <img *ngIf="recette.imageUrl" [src]="recette.imageUrl" alt="{{ recette.titre }}" />
+                </div>
                 <h2>Instructions</h2>
                 <p>{{ recette.instructions }}</p>
-            </div>
-            </div>
-            <div class="recette-image">
-            <img *ngIf="recette.imageUrl" [src]="recette.imageUrl" alt="{{ recette.titre }}" />
-            </div>
+              </div>
         </div>
 
         <!-- Boutons : Imprimer, Modifier, Supprimer -->
