@@ -8,5 +8,6 @@ export interface Recette {
     portions: number; // Nombre de portions
     categorie: string;
     utilisateurId: number;
+    imageUrl: string;
   }
   

@@ -15,6 +15,7 @@ interface NouvelleRecetteForm {
   tempsCuisson: number;
   portions: number;
   categorie: string;
+  imageUrl: string;
 }
 
 @Component({
@@ -34,7 +35,8 @@ export class RecetteFormComponent implements OnInit {
     tempsPreparation: 0,
     tempsCuisson: 0,
     portions: 1,
-    categorie: ''
+    categorie: '',
+    imageUrl: ''
   };
   editMode = false; // Pour savoir si on est en mode édition
   recetteId?: number;
@@ -64,7 +66,8 @@ export class RecetteFormComponent implements OnInit {
           tempsPreparation: recette.tempsPreparation,
           tempsCuisson: recette.tempsCuisson,
           portions: recette.portions,
-          categorie: recette.categorie
+          categorie: recette.categorie,
+          imageUrl: recette.imageUrl
         };
       }
     }
@@ -110,7 +113,8 @@ export class RecetteFormComponent implements OnInit {
       tempsPreparation: 0,
       tempsCuisson: 0,
       portions: 1,
-      categorie: ''
+      categorie: '',
+      imageUrl: ''
     };
   }
 

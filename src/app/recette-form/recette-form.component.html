@@ -19,6 +19,12 @@
         Le titre est requis
       </div>
     </div>
+
+    <!-- Champ imageUrl -->
+    <div class="mb-3">
+      <label for="imageUrl" class="form-label">Image de la Recette</label>
+      <input type="text" id="imageUrl" class="form-control" [(ngModel)]="nouvelleRecette.imageUrl" name="imageUrl" placeholder="URL de l'image">
+    </div>
   
     <!-- Champ Ingrédients -->
     <div class="mb-3">
