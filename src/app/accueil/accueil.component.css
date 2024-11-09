@@ -20,6 +20,15 @@
   font-size: 0.9rem;
 }
 
+.card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.card-link:hover .card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Légère ombre pour l’effet de survol */
+}
+
 .btn-primary {
   background-color: var(--vert-doux);
   border-color: var(--vert-doux);

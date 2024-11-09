@@ -28,22 +28,23 @@
   
   <div class="row">
     <div *ngFor="let recette of recettesPaginees" class="col-md-6 col-lg-4 mb-4">
-      <div class="card shadow-sm">
-        <img *ngIf="recette.imageUrl" [src]="recette.imageUrl" alt="{{ recette.titre }}" class="card-img-top"> <!-- >>>>>> DEBUT MODIF : Ajout de l'image <<<<<< FIN MODIF -->
-        <div class="card-body">
-          <h5 class="card-title">{{ recette.titre }}</h5>
-          <p class="card-text">
-            <strong>Catégorie :</strong> {{ recette.categorie }}<br>
-            <strong>Préparation :</strong> {{ recette.tempsPreparation }} min<br>
-            <strong>Cuisson :</strong> {{ recette.tempsCuisson }} min<br>
-            <strong>Portions :</strong> {{ recette.portions }}
-          </p>
-          <p class="card-text">
-            {{ recette.instructions | slice:0:100 }}...
-          </p>
-          <a [routerLink]="['/recette', recette.id]" class="btn btn-primary">Voir la Recette</a>
+      <a [routerLink]="['/recette', recette.id]" class="card-link"> <!-- Lien pour rendre toute la carte cliquable -->
+        <div class="card shadow-sm">
+          <img *ngIf="recette.imageUrl" [src]="recette.imageUrl" alt="{{ recette.titre }}" class="card-img-top"> <!-- >>>>>> DEBUT MODIF : Ajout de l'image <<<<<< FIN MODIF -->
+          <div class="card-body">
+            <h5 class="card-title">{{ recette.titre }}</h5>
+            <p class="card-text">
+              <strong>Catégorie :</strong> {{ recette.categorie }}<br>
+              <strong>Préparation :</strong> {{ recette.tempsPreparation }} min<br>
+              <strong>Cuisson :</strong> {{ recette.tempsCuisson }} min<br>
+              <strong>Portions :</strong> {{ recette.portions }}
+            </p>
+            <p class="card-text">
+              {{ recette.instructions | slice:0:100 }}...
+            </p>
+          </div>
         </div>
-      </div>
+      </a>
     </div>
   </div>
   
