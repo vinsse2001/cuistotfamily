@@ -109,10 +109,6 @@
   justify-content: center;
 }
 
-
-
-
-
 .wrapper {
   width: 35rem;
 }
@@ -128,8 +124,7 @@ p {
 }
 
 img {
-  width: 11rem;
-  height: 11rem;
+  width: 100%;
   float: right;
   margin: 0 10px 5px 0;
 }
