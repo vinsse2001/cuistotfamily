@@ -10,7 +10,7 @@
             <span class="recette-temps">
                 <i class="fa fa-clock"></i> Préparation : {{ recette.tempsPreparation }} min
             </span>
-            <span class="recette-temps">
+            <span *ngIf="recette.tempsCuisson > 0" class="recette-temps">
                 <i class="fa fa-clock"></i> Cuisson : {{ recette.tempsCuisson }} min
             </span>
         </div>
