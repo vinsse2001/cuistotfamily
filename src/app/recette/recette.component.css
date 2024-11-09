@@ -53,7 +53,7 @@
 }
 
 .recette-ingredients {
-  margin-bottom: 20px;
+  margin: 0px 15px 20px 10px;
 }
 
 .recette-ingredients h2 {
@@ -66,31 +66,20 @@
 }
 
 .recette-image {
-  position: absolute;
-  top: 0;
-  right: 0;
+  float: right;
+  margin: 0 0 10px 20px;
   max-width: 250px;
-  margin-left: 20px;
 }
 
 .recette-image img {
-  width: 100%;
-  max-width: 250px;
   height: auto;
-  max-height: 200px; 
   border-radius: 8px;
   shape-outside: inset(0 0 0 0);
 }
 
-/* Conteneur des instructions qui passe sur toute la largeur */
-.recette-instructions-container {
-  grid-column: 1 / -1; /* Etend sur toute la largeur */
-  margin-top: 20px;
-}
-
 .recette-instructions {
   text-align: justify;
-  margin-top: 20px;
+  margin: 0px 15px 20px 10px;
 }
 
 .recette-instructions h2 {
@@ -143,7 +132,7 @@ img {
   width: 11rem;
   height: 11rem;
   float: right;
-  margin: 0 2rem 1rem 0;
+  margin: 0 10px 5px 0;
 }
 
 .shape {
