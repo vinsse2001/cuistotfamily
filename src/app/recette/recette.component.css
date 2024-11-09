@@ -75,7 +75,9 @@
 
 .recette-image img {
   width: 100%;
+  max-width: 250px;
   height: auto;
+  max-height: 200px; 
   border-radius: 8px;
   shape-outside: inset(0 0 0 0);
 }
@@ -112,7 +114,7 @@
 
 /* Alignement des boutons */
 .recette-actions {
-  margin-top: 20px;
+  margin-top: 220px;
   display: flex;
   gap: 10px;
   justify-content: center;
