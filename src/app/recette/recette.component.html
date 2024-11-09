@@ -28,7 +28,9 @@
             </div>
             <div class="recette-instructions">
                 <h2>Instructions</h2>
-                <p>{{ recette.instructions }}</p>
+                <div *ngFor="let paragraph of getParagraphs(recette.instructions)">
+                    <p>{{ paragraph }}</p>
+                </div>
             </div>
         </div>
 
