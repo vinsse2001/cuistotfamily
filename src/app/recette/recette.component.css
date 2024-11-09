@@ -1,4 +1,4 @@
-/* Structure générale */
+/* Structure principale */
 .recette-container {
   max-width: 800px;
   margin: 20px auto;
@@ -47,6 +47,11 @@
   flex-direction: column;
 }
 
+.recette-texte-container {
+  position: relative;
+  padding-right: 220px; /* Espace réservé pour l'image */
+}
+
 .recette-ingredients {
   margin-bottom: 20px;
 }
@@ -60,24 +65,19 @@
   padding-left: 20px;
 }
 
-/* Style de l'image avec dimensionnement limité */
 .recette-image {
-  max-width: 250px;
-  width: 100%;
-  flex-shrink: 0;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+  max-width: 200px;
+  margin-left: 20px;
 }
 
 .recette-image img {
   width: 100%;
   height: auto;
-  float: right; /* Fait flotter l'image à droite pour l'habillage du texte */
-  margin-left: 20px; /* Espace entre le texte et l'image */
-  max-width: 250px; /* Largeur max de l'image */
-  border: 1px solid #ddd;
   border-radius: 8px;
+  shape-outside: inset(0 0 0 0);
 }
 
 /* Conteneur des instructions qui passe sur toute la largeur */
@@ -87,11 +87,8 @@
 }
 
 .recette-instructions {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #444;
-  /* Permet aux instructions de s'étendre sous l'image si nécessaire */
-  flex-grow: 1;
+  text-align: justify;
+  margin-top: 20px;
 }
 
 .recette-instructions h2 {
@@ -106,10 +103,46 @@
   text-align: justify;
 }
 
-/* Boutons d'action */
+/* Empêche la flottaison d'affecter les boutons */
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* Alignement des boutons */
 .recette-actions {
   margin-top: 20px;
   display: flex;
   gap: 10px;
   justify-content: center;
+}
+
+
+
+
+
+.wrapper {
+  width: 35rem;
+}
+
+h3 {
+  line-height: 2rem;
+  margin-bottom: -0.6rem;
+}
+
+p {
+  text-align: justify;
+  text-indent: 2em;
+}
+
+img {
+  width: 11rem;
+  height: 11rem;
+  float: right;
+  margin: 0 2rem 1rem 0;
+}
+
+.shape {
+  shape-outside: inset(0 0 0 0);
 }

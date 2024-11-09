@@ -15,26 +15,25 @@
             </span>
         </div>
 
-        <!-- Flexbox pour l'affichage des ingrédients, instructions, et image -->
-        <div class="recette-contenu-flex">
-            <div class="recette-texte">
+        <!-- Conteneur relatif pour placer l'image -->
+        <div class="recette-texte-container">
+            <figure class="recette-image">
+                <img *ngIf="recette.imageUrl" [src]="recette.imageUrl" alt="{{ recette.titre }}" />
+            </figure>
             <div class="recette-ingredients">
                 <h2>Ingrédients</h2>
                 <ul>
-                <li *ngFor="let ingredient of recette.ingredients">{{ ingredient }}</li>
+                    <li *ngFor="let ingredient of recette.ingredients">{{ ingredient }}</li>
                 </ul>
             </div>
             <div class="recette-instructions">
-                <div class="recette-image">
-                  <img *ngIf="recette.imageUrl" [src]="recette.imageUrl" alt="{{ recette.titre }}" />
-                </div>
                 <h2>Instructions</h2>
                 <p>{{ recette.instructions }}</p>
-              </div>
+            </div>
         </div>
 
-        <!-- Boutons : Imprimer, Modifier, Supprimer -->
-        <div class="recette-actions">
+        <!-- Boutons avec un conteneur clearfix -->
+        <div class="recette-actions clearfix">
             <button (click)="imprimerRecette()" class="btn btn-secondary">Imprimer</button>
             <button (click)="modifierRecette()" class="btn btn-primary">Modifier</button>
             <button (click)="supprimerRecette()" class="btn btn-danger">Supprimer</button>
