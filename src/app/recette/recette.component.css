@@ -56,8 +56,12 @@
   margin: 0px 15px 20px 10px;
 }
 
-.recette-ingredients h2 {
+.recette-ingredients h2,
+.recette-instructions h2 {
+  display: inline-block;
   font-size: 1.2rem;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 5px;
   margin-bottom: 10px;
 }
 
@@ -80,11 +84,6 @@
 .recette-instructions {
   text-align: justify;
   margin: 0px 15px 20px 10px;
-}
-
-.recette-instructions h2 {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
 }
 
 .recette-instructions p {
