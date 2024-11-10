@@ -24,6 +24,15 @@
               <li *ngFor="let ingredient of recette.ingredients">{{ ingredient }}</li>
             </ul>
         </div>
+        <div *ngIf="nutritionInfo">
+            <h3>Informations Nutritionnelles (pour 100g)</h3>
+            <ul>
+              <li>Calories : {{ nutritionInfo.calories }} kcal</li>
+              <li>Protéines : {{ nutritionInfo.protein }} g</li>
+              <li>Lipides : {{ nutritionInfo.fat }} g</li>
+              <li>Glucides : {{ nutritionInfo.carbohydrates }} g</li>
+            </ul>
+        </div>
         <div class="recette-instructions">
             <h2>Instructions</h2>
             <p *ngFor="let instruction of getParagraphs(recette.instructions)">{{ instruction }}</p>

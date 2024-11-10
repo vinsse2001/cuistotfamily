@@ -5,26 +5,32 @@ import { RouterModule, Router } from '@angular/router';
 import { RecetteService } from '../services/recette.service';
 import { Recette } from '../models/recette.model';
 import { FormsModule } from '@angular/forms';
+import { NutritionService } from '../services/nutrition.service';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-recette',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule, HttpClient],
   templateUrl: './recette.component.html',
   styleUrls: ['./recette.component.css']
 })
 export class RecetteComponent implements OnInit {
   recette?: Recette;
+  nutritionInfo: any = {}; // Stocke les informations nutritives de la recette
 
   constructor(
     private route: ActivatedRoute,
     private recetteService: RecetteService,
-    private router: Router
+    private router: Router,
+    private nutritionService: NutritionService
   ) {}
 
   ngOnInit() {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.recette = this.recetteService.obtenirRecette(id);
+    this.calculerInfosNutrition();
   }
 
   getParagraphs(text: string): string[] {
@@ -47,4 +53,21 @@ export class RecetteComponent implements OnInit {
   imprimerRecette() {
     window.print();
   } 
+
+  calculerInfosNutrition() {
+    if (this.recette) {
+      // Parcours chaque ingrédient et récupère les données nutritionnelles
+      this.recette.ingredients.forEach(ingredient => {
+        this.nutritionService.getNutritionalData(ingredient).subscribe(data => {
+          if (data) {
+            // Ajoute les valeurs nutritives par ingrédient au total
+            this.nutritionInfo.calories = (this.nutritionInfo.calories || 0) + data.calories;
+            this.nutritionInfo.protein = (this.nutritionInfo.protein || 0) + data.protein;
+            this.nutritionInfo.fat = (this.nutritionInfo.fat || 0) + data.fat;
+            this.nutritionInfo.carbohydrates = (this.nutritionInfo.carbohydrates || 0) + data.carbohydrates;
+          }
+        });
+      });
+    }
+  }
 }
