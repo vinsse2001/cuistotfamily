@@ -56,17 +56,17 @@ export class RecetteComponent implements OnInit {
   calculerInfosNutrition() {
     if (this.recette) {
       // Parcours chaque ingrédient et récupère les données nutritionnelles
-      this.recette.ingredients.forEach(ingredient => {
-        this.nutritionService.getNutritionalData(ingredient).subscribe(data => {
-          if (data) {
-            // Ajoute les valeurs nutritives par ingrédient au total
-            this.nutritionInfo.calories = (this.nutritionInfo.calories || 0) + data.calories;
-            this.nutritionInfo.protein = (this.nutritionInfo.protein || 0) + data.protein;
-            this.nutritionInfo.fat = (this.nutritionInfo.fat || 0) + data.fat;
-            this.nutritionInfo.carbohydrates = (this.nutritionInfo.carbohydrates || 0) + data.carbohydrates;
-          }
-        });
-      });
+      // this.recette.ingredients.forEach(ingredient => {
+      //   this.nutritionService.getNutritionalData(ingredient).subscribe(data => {
+      //     if (data) {
+      //       // Ajoute les valeurs nutritives par ingrédient au total
+      //       this.nutritionInfo.calories = (this.nutritionInfo.calories || 0) + data.calories;
+      //       this.nutritionInfo.protein = (this.nutritionInfo.protein || 0) + data.protein;
+      //       this.nutritionInfo.fat = (this.nutritionInfo.fat || 0) + data.fat;
+      //       this.nutritionInfo.carbohydrates = (this.nutritionInfo.carbohydrates || 0) + data.carbohydrates;
+      //     }
+      //   });
+      // });
     }
   }
 }

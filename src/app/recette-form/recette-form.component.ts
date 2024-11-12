@@ -6,10 +6,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RecetteService } from '../services/recette.service';
 import { Recette } from '../models/recette.model';
 import { CategorieService } from '../services/categorie.service';
+import { NutritionService } from '../services/nutrition.service';
+import { Ingredient } from '../models/ingredient.model';
+import { RecetteIngredient } from '../models/recetteingredient.model';
 
 interface NouvelleRecetteForm {
   titre: string;
-  ingredients: string;
+  ingredients: RecetteIngredient[];
   instructions: string;
   tempsPreparation: number;
   tempsCuisson: number;
@@ -25,12 +28,13 @@ interface NouvelleRecetteForm {
   templateUrl: './recette-form.component.html',
   styleUrls: ['./recette-form.component.css']
 })
+
 export class RecetteFormComponent implements OnInit {
   @ViewChild('recetteForm') recetteForm!: NgForm;
   categories: string[] = [];
   nouvelleRecette: NouvelleRecetteForm = {
     titre: '',
-    ingredients: '',
+    ingredients: [] as RecetteIngredient[],
     instructions: '',
     tempsPreparation: 0,
     tempsCuisson: 0,
@@ -41,12 +45,15 @@ export class RecetteFormComponent implements OnInit {
   editMode = false; // Pour savoir si on est en mode édition
   recetteId?: number;
   messageConfirmation: string = '';
+  ingredientRecherche = '';
+  suggestions: Ingredient[] = []; // Suggestions d'ingrédients
 
   constructor(
     private recetteService: RecetteService,
     private route: ActivatedRoute,
     private router: Router,
-    private categorieService: CategorieService
+    private categorieService: CategorieService,
+    private nutritionService: NutritionService
   ) {}
 
   ngOnInit() {
@@ -61,7 +68,7 @@ export class RecetteFormComponent implements OnInit {
       if (recette) {
         this.nouvelleRecette = {
           titre: recette.titre,
-          ingredients: recette.ingredients.join(', '),
+          ingredients: recette.ingredients,
           instructions: recette.instructions,
           tempsPreparation: recette.tempsPreparation,
           tempsCuisson: recette.tempsCuisson,
@@ -87,9 +94,9 @@ export class RecetteFormComponent implements OnInit {
   }
 
   ajouterRecette() {
-    const ingredientsArray = this.nouvelleRecette.ingredients
-      .split(',')
-      .map(ingredient => ingredient.trim());
+    // const ingredientsArray = this.nouvelleRecette.ingredients
+    //   .split(',')
+    //   .map(ingredient => ingredient.trim());
 
     if (this.editMode && this.recetteId != null) {
       // Mode édition : Mettre à jour la recette existante
@@ -108,7 +115,7 @@ export class RecetteFormComponent implements OnInit {
 
     this.nouvelleRecette = {
       titre: '',
-      ingredients: '',
+      ingredients: [],
       instructions: '',
       tempsPreparation: 0,
       tempsCuisson: 0,
@@ -116,6 +123,28 @@ export class RecetteFormComponent implements OnInit {
       categorie: '',
       imageUrl: ''
     };
+  }
+
+  rechercherIngredient() {
+    this.suggestions = this.nutritionService.rechercherIngredient(this.ingredientRecherche);
+  }
+
+  ajouterIngredient(ingredientRef: Ingredient, quantite: number, unite: string) {
+    this.nouvelleRecette.ingredients.push({
+      ingredientId: ingredientRef.id,
+      quantite,
+      unite
+    });
+  }
+
+  ajouterNouvelIngredient() {
+    // Logique pour ajouter un nouvel ingrédient non trouvé dans la base
+    this.nutritionService.ajouterNouvelIngredient(this.ingredientRecherche)
+      .subscribe((ingredient: Ingredient) => {
+        if (ingredient) {
+          this.ajouterIngredient(ingredient);
+        }
+      });
   }
 
   afficherMessageConfirmation(message: string) {

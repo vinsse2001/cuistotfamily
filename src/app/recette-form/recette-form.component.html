@@ -29,17 +29,24 @@
     <!-- Champ Ingrédients -->
     <div class="mb-3">
       <label for="ingredients" class="form-label">Ingrédients</label>
-      <textarea
-        id="ingredients"
-        class="form-control"
-        [(ngModel)]="nouvelleRecette.ingredients"
-        name="ingredients"
-        required
-        placeholder="Listez les ingrédients, séparés par des virgules"
-      ></textarea>
-      <div *ngIf="recetteForm.controls['ingredients']?.invalid && recetteForm.controls['ingredients']?.touched" class="text-danger">
-        Les ingrédients sont requis
+      <div class="ingredient-section">
+        <label for="ingredient-search">Ajouter un ingrédient :</label>
+        <input id="ingredient-search" [(ngModel)]="ingredientRecherche" (input)="rechercherIngredient()" placeholder="Rechercher un ingrédient" />
+      
+        <ul *ngIf="suggestions.length > 0">
+          <li *ngFor="let suggestion of suggestions" (click)="ajouterIngredient(suggestion)">
+            {{ suggestion.nom }}
+          </li>
+        </ul>
+      
+        <button type="button" (click)="ajouterNouvelIngredient()">Nouvel ingrédient</button>
       </div>
+      
+      <ul class="ingredient-list">
+        <li *ngFor="let ingredient of nouvelleRecette.ingredients">
+          {{ ingredient.nom }} - {{ ingredient.quantite || 0 }} {{ ingredient.unite || '' }}
+        </li>
+      </ul>
     </div>
   
     <!-- Champ Instructions -->
