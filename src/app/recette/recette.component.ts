@@ -6,13 +6,12 @@ import { RecetteService } from '../services/recette.service';
 import { Recette } from '../models/recette.model';
 import { FormsModule } from '@angular/forms';
 import { NutritionService } from '../services/nutrition.service';
-import { HttpClient } from '@angular/common/http';
 
 
 @Component({
   selector: 'app-recette',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, HttpClient],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './recette.component.html',
   styleUrls: ['./recette.component.css']
 })
