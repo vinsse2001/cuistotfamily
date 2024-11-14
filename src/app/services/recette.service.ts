@@ -11,29 +11,71 @@ export class RecetteService {
   constructor() { }
 
   private recettes: Recette[] = [
-    { id: 1, titre: 'Salade César', ingredients: ['Laitue', 'Poulet', 'Croutons', 'Parmesan'], instructions: 'Étape 1: : Faites dorer le pain, coupé en cubes, 3 min dans un peu d huile.\n\nÉtape 2 : Déchirez les feuilles de romaine dans un saladier, et ajoutez les croûtons préalablement épongés dans du papier absorbant.\n\nÉtape 3 : Préparez la sauce : Faites cuire l oeuf 1 min 30 dans l eau bouillante, et rafraîchissez-le.\n\nÉtape 4 : Cassez-le dans le bol d un mixeur et mixez, avec tous les autres ingrédients; rectifiez l assaissonnement et incorporez à la salade. Cassez-le dans le bol d un mixeur et mixez, avec tous les autres ingrédients; rectifiez l assaissonnement et incorporez à la salade.\n\nÉtape 5 : Décorez de copeaux de parmesan, et servez.', tempsPreparation: 10, tempsCuisson: 0, portions: 2, categorie: 'Plat', utilisateurId: 1, imageUrl: 'https://resize-elle.ladmedia.fr/r/300,388,center-middle,forcex,ffffff/img/var/plain_site/storage/images/elle-a-table/fiches-cuisine/tous-les-themes/recettes-faciles/168377-14-fre-FR/Recettes-faciles.jpg' },
-    { id: 2, titre: 'Quiche Lorraine', ingredients: ['Pâte brisée', 'Lardons', 'Crème', 'Oeufs'], instructions: 'Préparer la pâte et cuire au four.', tempsPreparation: 15, tempsCuisson: 25, portions: 4, categorie: 'Plat', utilisateurId: 1, imageUrl: 'https://images.radio-canada.ca/q_auto,w_861/v1/alimentation/recette/16x9/poelee-inspiration-tajine.jpg' },
-    { id: 3, titre: 'Salade César 2', ingredients: ['Laitue', 'Poulet', 'Croutons', 'Parmesan'], instructions: 'Mélanger tous les ingrédients.\nManger avec les doigts.\n\nFaire un bisou à son voisin.', tempsPreparation: 10, tempsCuisson: 0, portions: 2, categorie: 'Entrée', utilisateurId: 2, imageUrl: 'https://images.radio-canada.ca/q_auto,w_970/v1/alimentation/recette/16x9/2789-soupe-pois-chiches-pates.jpg' },
-    { id: 4, titre: 'Quiche Lorraine 2', ingredients: ['Pâte brisée', 'Lardons', 'Crème', 'Oeufs'], instructions: 'Préparer la pâte et cuire au four.', tempsPreparation: 15, tempsCuisson: 25, portions: 4, categorie: 'Plat', utilisateurId: 1, imageUrl: '' },
-    { id: 5, titre: 'Salade César 3', ingredients: ['Laitue', 'Poulet', 'Croutons', 'Parmesan'], instructions: 'Mélanger tous les ingrédients.\nManger avec les doigts.\n\nFaire un bisou à son voisin.', tempsPreparation: 10, tempsCuisson: 0, portions: 2, categorie: 'Plat', utilisateurId: 1, imageUrl: 'https://images.radio-canada.ca/q_auto,w_970/v1/alimentation/recette/16x9/salade-pois-chiches-chou-fleur-orange.jpg' },
-    { id: 6, titre: 'Quiche Lorraine 3', ingredients: ['Pâte brisée', 'Lardons', 'Crème', 'Oeufs'], instructions: 'Préparer la pâte et cuire au four.', tempsPreparation: 15, tempsCuisson: 25, portions: 4, categorie: 'Plat', utilisateurId: 2, imageUrl: '' },
-    { id: 7, titre: 'Salade César 4', ingredients: ['Laitue', 'Poulet', 'Croutons', 'Parmesan'], instructions: 'Mélanger tous les ingrédients.\nManger avec les doigts.\n\nFaire un bisou à son voisin.', tempsPreparation: 10, tempsCuisson: 0, portions: 2, categorie: 'Dessert', utilisateurId: 1, imageUrl: 'https://images.radio-canada.ca/q_auto,w_970/v1/alimentation/recette/16x9/sous-marin-boulettes-vegetariennes.jpg' },
-    { id: 8, titre: 'Quiche Lorraine 4', ingredients: ['Pâte brisée', 'Lardons', 'Crème', 'Oeufs'], instructions: 'Préparer la pâte et cuire au four.', tempsPreparation: 15, tempsCuisson: 25, portions: 4, categorie: 'Plat', utilisateurId: 3, imageUrl: '' }
+    {
+      id: '1',
+      utilisateurId: 'user1',
+      titre: 'Crêpes',
+      ingredients: [
+        { ingredientId: '1', quantite: 250, unite: 'g' },  // Farine
+        { ingredientId: '2', quantite: 500, unite: 'ml' }, // Lait
+        { ingredientId: '3', quantite: 3, unite: 'unités' } // Œufs
+      ],
+      instructions: 'Mélangez la farine avec les œufs, puis ajoutez le lait petit à petit. Faites cuire les crêpes dans une poêle chaude.',
+      tempsPreparation: 10,
+      tempsCuisson: 20,
+      portions: 4,
+      categorie: 'Dessert',
+      imageUrl: 'https://www.francine.com/wp-content/uploads/2018/09/pate-a-crepes-4-3-2-1-sautez-211584757399-2.webp'
+    },
+    {
+      id: '2',
+      utilisateurId: 'user2',
+      titre: 'Salade César',
+      ingredients: [
+        { ingredientId: '4', quantite: 1, unite: 'pièce' }, // Laitue romaine
+        { ingredientId: '5', quantite: 100, unite: 'g' },   // Poulet grillé
+        { ingredientId: '6', quantite: 50, unite: 'g' },    // Parmesan
+        { ingredientId: '7', quantite: 50, unite: 'g' }     // Croûtons
+      ],
+      instructions: 'Mélangez la laitue avec le poulet grillé, le parmesan, et les croûtons. Ajoutez de la sauce César et mélangez bien.',
+      tempsPreparation: 15,
+      tempsCuisson: 0,
+      portions: 2,
+      categorie: 'Entrée',
+      imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTW2A1Xn3Bgnvuwu22v0xqjIou4b159pstzTA&s'
+    },
+    {
+      id: '3',
+      utilisateurId: 'user3',
+      titre: 'Pâtes Carbonara',
+      ingredients: [
+        { ingredientId: '8', quantite: 200, unite: 'g' },   // Pâtes
+        { ingredientId: '9', quantite: 100, unite: 'g' },   // Lardons
+        { ingredientId: '3', quantite: 2, unite: 'unités' },// Œufs
+        { ingredientId: '10', quantite: 50, unite: 'g' }    // Parmesan râpé
+      ],
+      instructions: 'Faites cuire les pâtes. Dans un bol, battez les œufs avec le parmesan. Faites cuire les lardons, puis mélangez le tout avec les pâtes chaudes.',
+      tempsPreparation: 5,
+      tempsCuisson: 15,
+      portions: 2,
+      categorie: 'Plat',
+      imageUrl: 'https://assets.afcdn.com/recipe/20200316/109086_w1024h576c1cx1060cy707cxt0cyt0cxb2121cyb1414.jpg'
+    }
   ];
   private recettesSubject = new BehaviorSubject<Recette[]>(this.recettes);
 
   recettes$ = this.recettesSubject.asObservable();
 
   ajouterRecette(recette: Recette) {
-    this.recettes.push({ ...recette, id: Date.now() });
+    this.recettes.push({ ...recette, id: ''+Date.now() });
     this.recettesSubject.next(this.recettes);
   }
 
-  obtenirRecette(id: number): Recette | undefined {
+  obtenirRecette(id: string): Recette | undefined {
     return this.recettes.find(r => r.id === id);
   }
 
-  modifierRecette(id: number, recette: Recette) {
+  modifierRecette(id: string, recette: Recette) {
     const index = this.recettes.findIndex(r => r.id === id);
     if (index !== -1) {
       this.recettes[index] = { ...recette, id };
@@ -41,12 +83,12 @@ export class RecetteService {
     }
   }
   
-  supprimerRecette(id: number) {
+  supprimerRecette(id: string) {
     this.recettes = this.recettes.filter(r => r.id !== id);
     this.recettesSubject.next(this.recettes);
   }
 
-  obtenirRecettesParUtilisateur(utilisateurId: number): Recette[] {
+  obtenirRecettesParUtilisateur(utilisateurId: string): Recette[] {
     return this.recettes.filter(recette => recette.utilisateurId === utilisateurId);
   }
 }
