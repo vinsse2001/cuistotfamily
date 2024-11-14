@@ -7,7 +7,6 @@ import { Recette } from '../models/recette.model';
 import { FormsModule } from '@angular/forms';
 import { NutritionService } from '../services/nutrition.service';
 
-
 @Component({
   selector: 'app-recette',
   standalone: true,
@@ -27,8 +26,10 @@ export class RecetteComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.recette = this.recetteService.obtenirRecette(id);
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.recette = this.recetteService.obtenirRecette(id);
+    }
     this.calculerInfosNutrition();
   }
 
