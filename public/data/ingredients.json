@@ -1,0 +1,79 @@
+[
+    {
+      "id": "1",
+      "nom": "Farine blanche",
+      "calories": 364,
+      "proteines": 10,
+      "glucides": 76,
+      "lipides": 1,
+      "vitamines": {
+        "B1": 0.1,
+        "B2": 0.03
+      },
+      "mineraux": {
+        "calcium": 15,
+        "fer": 0.9
+      }
+    },
+    {
+      "id": "2",
+      "nom": "Oeuf",
+      "calories": 155,
+      "proteines": 13,
+      "glucides": 1.1,
+      "lipides": 11,
+      "vitamines": {
+        "A": 140,
+        "D": 1.8,
+        "B12": 0.89
+      },
+      "mineraux": {
+        "calcium": 50,
+        "fer": 1.2
+      }
+    },
+    {
+      "id": "3",
+      "nom": "Beurre",
+      "calories": 717,
+      "proteines": 0.85,
+      "glucides": 0.1,
+      "lipides": 81,
+      "vitamines": {
+        "A": 684,
+        "E": 2.32
+      },
+      "mineraux": {
+        "calcium": 24,
+        "potassium": 24
+      }
+    },
+    {
+      "id": "4",
+      "nom": "Sucre",
+      "calories": 387,
+      "proteines": 0,
+      "glucides": 100,
+      "lipides": 0,
+      "vitamines": {},
+      "mineraux": {}
+    },
+    {
+      "id": "5",
+      "nom": "Lait entier",
+      "calories": 61,
+      "proteines": 3.2,
+      "glucides": 4.8,
+      "lipides": 3.4,
+      "vitamines": {
+        "A": 47,
+        "B2": 0.17,
+        "D": 1
+      },
+      "mineraux": {
+        "calcium": 120,
+        "potassium": 150
+      }
+    }
+  ]
+  
