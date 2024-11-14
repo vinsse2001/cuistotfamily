@@ -1,30 +1,39 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
+import { map, catchError, shareReplay } from 'rxjs/operators';
 import { Ingredient } from '../models/ingredient.model';
-
-interface NutritionResponse {
-  calories: number;
-  totalNutrients: {
-    PROCNT?: { quantity: number }; // Protéines
-    FAT?: { quantity: number };     // Lipides
-    CHOCDF?: { quantity: number };  // Glucides
-  };
-}
 
 @Injectable({
   providedIn: 'root'
 })
 export class NutritionService {
-  baseIngredients: Ingredient[] = [
-    { nom: "Farine", calories: 364, proteines: 10, glucides: 76, lipides: 1 },
-    { nom: "Oeuf", calories: 155, proteines: 13, glucides: 1.1, lipides: 11 }
-  ];
+  private readonly ingredientsUrl = 'data/ingredients.json';
+  private ingredientsCache$?: Observable<Ingredient[]>;
 
   constructor(private http: HttpClient) {}
 
-  rechercherIngredient(nom: string): Ingredient[] {
-    return this.baseIngredients.filter((ing: Ingredient) => ing.nom.toLowerCase().includes(nom.toLowerCase()));
+  // Charge et met en cache les ingrédients pré-enregistrés dans l'appli (avec infos nutritionnelles) pour éviter les requêtes répétées
+  getIngredients(): Observable<Ingredient[]> {
+    if (!this.ingredientsCache$) {
+      this.ingredientsCache$ = this.http.get<Ingredient[]>(this.ingredientsUrl).pipe(
+        shareReplay(1), // Met en cache les résultats
+        catchError(error => {
+          console.error('Erreur lors du chargement des ingrédients:', error);
+          return of([]);
+        })
+      );
+    }
+    return this.ingredientsCache$;
+  }
+
+  // Recherche un ingrédient dans la liste chargée
+  rechercherIngredient(nom: string): Observable<Ingredient[]> {
+    return this.getIngredients().pipe(
+      map(ingredients => ingredients.filter(ing => 
+        ing.nom.toLowerCase().includes(nom.toLowerCase())
+      ))
+    );
   }
   
   ajouterNouvelIngredient(nom: string): Observable<Ingredient> {

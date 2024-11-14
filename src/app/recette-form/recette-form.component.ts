@@ -42,11 +42,11 @@ export class RecetteFormComponent implements OnInit {
     categorie: '',
     imageUrl: ''
   };
+  ingredientRecherche = ''; // Recherche en cours dans le champ
+  suggestions: Ingredient[] = []; // Liste des suggestions
   editMode = false; // Pour savoir si on est en mode édition
-  recetteId?: number;
+  recetteId?: string;
   messageConfirmation: string = '';
-  ingredientRecherche = '';
-  suggestions: Ingredient[] = []; // Suggestions d'ingrédients
 
   constructor(
     private recetteService: RecetteService,
@@ -54,16 +54,16 @@ export class RecetteFormComponent implements OnInit {
     private router: Router,
     private categorieService: CategorieService,
     private nutritionService: NutritionService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.categories = this.categorieService.obtenirCategories();
-    
+
     // Récupère l'ID de la recette à partir de l'URL (s'il est présent)
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.editMode = true;
-      this.recetteId = +id;
+      this.recetteId = id;
       const recette = this.recetteService.obtenirRecette(this.recetteId);
       if (recette) {
         this.nouvelleRecette = {
@@ -80,6 +80,30 @@ export class RecetteFormComponent implements OnInit {
     }
   }
 
+  // Fonction pour obtenir l'ID d'un ingrédient par son nom depuis `ingredients.json`
+  obtenirIngredientIdParNom(nom: string): string {
+    let ingredientId = '';
+    this.nutritionService.getIngredients().subscribe(ingredients => {
+      const ingredient = ingredients.find(ing => ing.nom === nom);
+      if (ingredient) {
+        ingredientId = ingredient.id ?? ''; // Utilise une chaîne vide si `ingredient.id` est `undefined`
+      }
+    });
+    return ingredientId;
+  }
+
+  // Méthode pour obtenir le nom de l'ingrédient par son ID
+  getIngredientNomById(ingredientId: string): string {
+    let nom = '';
+    this.nutritionService.getIngredients().subscribe(ingredients => {
+      const ingredient = ingredients.find(ing => ing.id === ingredientId);
+      if (ingredient) {
+        nom = ingredient.nom;
+      }
+    });
+    return nom;
+  }
+
   onSubmit() {
     // Marque tous les champs comme "touchés" pour afficher les erreurs si invalides
     if (this.recetteForm) {
@@ -87,6 +111,7 @@ export class RecetteFormComponent implements OnInit {
     }
 
     if (this.recetteForm.valid) {
+      console.log("Recette soumise :", this.nouvelleRecette);
       this.ajouterRecette(); // Enregistre la recette si le formulaire est valide
       this.afficherMessageConfirmation('Recette ajoutée avec succès !');
       this.recetteForm.resetForm(); // Réinitialise le formulaire après soumission
@@ -94,22 +119,20 @@ export class RecetteFormComponent implements OnInit {
   }
 
   ajouterRecette() {
-    // const ingredientsArray = this.nouvelleRecette.ingredients
-    //   .split(',')
-    //   .map(ingredient => ingredient.trim());
-
     if (this.editMode && this.recetteId != null) {
       // Mode édition : Mettre à jour la recette existante
       this.recetteService.modifierRecette(this.recetteId, {
         ...this.nouvelleRecette,
-        ingredients: ingredientsArray
+        id: this.recetteId,
+        utilisateurId: this.obtenirUtilisateurId()
       } as Recette);
       this.router.navigate(['/']); // Redirige vers l'accueil après modification
     } else {
       // Mode création : Ajouter une nouvelle recette
       this.recetteService.ajouterRecette({
         ...this.nouvelleRecette,
-        ingredients: ingredientsArray
+        id: this.genererIdUnique(),
+        utilisateurId: this.obtenirUtilisateurId()
       } as Recette);
     }
 
@@ -125,24 +148,46 @@ export class RecetteFormComponent implements OnInit {
     };
   }
 
+  obtenirUtilisateurId(): string {
+    // Retourne l'ID de l'utilisateur en fonction de ta logique
+    return 'utilisateur-id-par-defaut'; // Remplace par l'ID réel
+  }
+
+  genererIdUnique(): string {
+    // Génère un ID unique, par exemple avec un timestamp
+    return Date.now().toString();
+  }
+
   rechercherIngredient() {
-    this.suggestions = this.nutritionService.rechercherIngredient(this.ingredientRecherche);
+    this.nutritionService.rechercherIngredient(this.ingredientRecherche).subscribe((results: Ingredient[]) => {
+      this.suggestions = results;
+    });
   }
 
   ajouterIngredient(ingredientRef: Ingredient, quantite: number, unite: string) {
+    if (!ingredientRef.id) {
+      console.error("L'ingrédient doit avoir un ID valide pour être ajouté.");
+      return;
+    }
+
     this.nouvelleRecette.ingredients.push({
       ingredientId: ingredientRef.id,
       quantite,
       unite
     });
+
+    this.ingredientRecherche = ''; // Réinitialise la recherche
+    this.suggestions = []; // Vide les suggestions
   }
 
-  ajouterNouvelIngredient() {
     // Logique pour ajouter un nouvel ingrédient non trouvé dans la base
+    ajouterNouvelIngredient() {
     this.nutritionService.ajouterNouvelIngredient(this.ingredientRecherche)
       .subscribe((ingredient: Ingredient) => {
-        if (ingredient) {
-          this.ajouterIngredient(ingredient);
+        if (ingredient && ingredient.id) {
+          this.ajouterIngredient(ingredient, 1, '');
+        } else {
+          console.error("L'ingrédient n'a pas pu être ajouté car il manque un ID.");
         }
       });
   }

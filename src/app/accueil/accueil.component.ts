@@ -5,6 +5,7 @@ import { RecetteService } from '../services/recette.service';
 import { Recette } from '../models/recette.model';
 import { FormsModule } from '@angular/forms';
 import { CategorieService } from '../services/categorie.service';
+import { NutritionService } from '../services/nutrition.service';
 
 @Component({
   selector: 'app-accueil',
@@ -21,24 +22,37 @@ export class AccueilComponent implements OnInit {
   categories: string[] = [];
   categorieFiltre: string = '';
   affichageUtilisateur: boolean = false;
-  utilisateurId: number = 1;
+  utilisateurId: string = 'user1';  // TODO - à remplacer par véritable id user
 
   constructor(private recetteService: RecetteService,
-              private categorieService: CategorieService) {}
+              private categorieService: CategorieService,
+              private nutritionService: NutritionService) {}
 
   ngOnInit() {
     this.categories = this.categorieService.obtenirCategories();
     this.recetteService.recettes$.subscribe(recettes => (this.recettes = recettes));
   }
 
-  filteredRecettes(): Recette[] {
     // Filtre les recettes par titre ou ingrédient
+    filteredRecettes(): Recette[] {
     return this.recettes.filter(recette =>
       recette.titre.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
       recette.ingredients.some(ingredient =>
-        ingredient.toLowerCase().includes(this.searchTerm.toLowerCase())
+        this.getIngredientNom(ingredient.ingredientId).toLowerCase().includes(this.searchTerm.toLowerCase())
       )
     );
+  }
+  
+  // Méthode pour obtenir le nom de l'ingrédient par son ID
+  getIngredientNom(ingredientId: string): string {
+    let nom = '';
+    this.nutritionService.getIngredients().subscribe(ingredients => {
+      const ingredient = ingredients.find(ing => ing.id === ingredientId);
+      if (ingredient) {
+        nom = ingredient.nom;
+      }
+    });
+    return nom;
   }
 
   get recettesFiltrees(): Recette[] {
