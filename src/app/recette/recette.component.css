@@ -132,3 +132,41 @@ img {
 .shape {
   shape-outside: inset(0 0 0 0);
 }
+
+.nutrition-info {
+  width: 100%;
+  margin-top: 20px;
+  font-size: 0.85em;
+  background-color: #f9f9f9;
+  padding: 8px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.nutrition-info h3 {
+  text-align: center;
+  font-size: 1em;
+  margin-bottom: 8px;
+}
+
+.nutrition-info table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.nutrition-info th {
+  padding: 6px;
+  background-color: #d4e7dc;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.nutrition-info td {
+  padding: 4px;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 0.85em;
+}
+
+.nutrition-info tr:last-child td {
+  border-bottom: none;
+}

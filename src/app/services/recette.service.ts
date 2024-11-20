@@ -16,9 +16,9 @@ export class RecetteService {
       utilisateurId: 'user1',
       titre: 'Crêpes',
       ingredients: [
-        { ingredientId: '1', quantite: 250, unite: 'g' },  // Farine
-        { ingredientId: '2', quantite: 500, unite: 'ml' }, // Lait
-        { ingredientId: '3', quantite: 3, unite: 'unités' } // Œufs
+        { ingredientId: '12846', quantite: 250, unite: 'g' },  // Farine
+        { ingredientId: '25916', quantite: 500, unite: 'ml' }, // Lait
+        { ingredientId: '30134', quantite: 3, unite: 'unités' } // Œufs
       ],
       instructions: 'Mélangez la farine avec les œufs, puis ajoutez le lait petit à petit. Faites cuire les crêpes dans une poêle chaude.',
       tempsPreparation: 10,
@@ -32,10 +32,10 @@ export class RecetteService {
       utilisateurId: 'user2',
       titre: 'Salade César',
       ingredients: [
-        { ingredientId: '4', quantite: 1, unite: 'pièce' }, // Laitue romaine
-        { ingredientId: '5', quantite: 100, unite: 'g' },   // Poulet grillé
-        { ingredientId: '6', quantite: 50, unite: 'g' },    // Parmesan
-        { ingredientId: '7', quantite: 50, unite: 'g' }     // Croûtons
+        { ingredientId: '12315', quantite: 1, unite: 'pièce' }, // Laitue romaine
+        { ingredientId: '39211', quantite: 100, unite: 'g' },   // Poulet grillé
+        { ingredientId: '23477', quantite: 50, unite: 'g' },    // Parmesan
+        { ingredientId: '12025', quantite: 50, unite: 'g' }     // Croûtons
       ],
       instructions: 'Mélangez la laitue avec le poulet grillé, le parmesan, et les croûtons. Ajoutez de la sauce César et mélangez bien.',
       tempsPreparation: 15,
@@ -49,10 +49,10 @@ export class RecetteService {
       utilisateurId: 'user3',
       titre: 'Pâtes Carbonara',
       ingredients: [
-        { ingredientId: '8', quantite: 200, unite: 'g' },   // Pâtes
-        { ingredientId: '9', quantite: 100, unite: 'g' },   // Lardons
-        { ingredientId: '3', quantite: 2, unite: 'unités' },// Œufs
-        { ingredientId: '10', quantite: 50, unite: 'g' }    // Parmesan râpé
+        { ingredientId: '1016', quantite: 200, unite: 'g' },   // Pâtes
+        { ingredientId: '11006', quantite: 100, unite: 'g' },   // Lardons
+        { ingredientId: '19559', quantite: 2, unite: 'unités' },// Œufs
+        { ingredientId: '28505', quantite: 50, unite: 'g' }    // Parmesan râpé
       ],
       instructions: 'Faites cuire les pâtes. Dans un bol, battez les œufs avec le parmesan. Faites cuire les lardons, puis mélangez le tout avec les pâtes chaudes.',
       tempsPreparation: 5,

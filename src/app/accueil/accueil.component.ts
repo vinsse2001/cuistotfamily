@@ -16,6 +16,7 @@ import { NutritionService } from '../services/nutrition.service';
 })
 export class AccueilComponent implements OnInit {
   recettes: Recette[] = [];
+  ingredientsCache: { [id: string]: string } = {}; // Cache pour stocker les noms des ingrédients par ID
   searchTerm: string = '';
   currentPage: number = 1;
   recettesParPage: number = 6;
@@ -30,6 +31,15 @@ export class AccueilComponent implements OnInit {
 
   ngOnInit() {
     this.categories = this.categorieService.obtenirCategories();
+    // Charge les ingrédients une seule fois et les met en cache
+    this.nutritionService.getIngredients().subscribe(ingredients => {
+      this.ingredientsCache = ingredients.reduce((acc, ingredient) => {
+        if (ingredient.id) {
+          acc[ingredient.id] = ingredient.nom;
+        }
+        return acc;
+      }, {} as { [id: string]: string });
+    });
     this.recetteService.recettes$.subscribe(recettes => (this.recettes = recettes));
   }
 
@@ -38,7 +48,7 @@ export class AccueilComponent implements OnInit {
     return this.recettes.filter(recette =>
       recette.titre.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
       recette.ingredients.some(ingredient =>
-        this.getIngredientNom(ingredient.ingredientId).toLowerCase().includes(this.searchTerm.toLowerCase())
+        (this.ingredientsCache[ingredient.ingredientId] || '').toLowerCase().includes(this.searchTerm.toLowerCase())
       )
     );
   }

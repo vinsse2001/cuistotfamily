@@ -16,11 +16,45 @@ export class NutritionService {
   // Charge et met en cache les ingrédients pré-enregistrés dans l'appli (avec infos nutritionnelles) pour éviter les requêtes répétées
   getIngredients(): Observable<Ingredient[]> {
     if (!this.ingredientsCache$) {
-      this.ingredientsCache$ = this.http.get<Ingredient[]>(this.ingredientsUrl).pipe(
-        shareReplay(1), // Met en cache les résultats
+      this.ingredientsCache$ = this.http.get<any[]>(this.ingredientsUrl).pipe(
+        map(data =>
+          data.map(item => ({
+            id: item.id.toString(),
+            nom: item.nom,
+            calories: item.calories || 0,
+            proteines: item.proteines || 0,
+            glucides: item.glucides || 0,
+            lipides: item.lipides || 0,
+            fibres: item.fibres || 0,
+            vitamines: {
+              C: item.vitamine_C || 0,
+              B1: item.vitamine_B1 || 0,
+              B2: item.vitamine_B2 || 0,
+              B3: item.vitamine_B3 || 0,
+              B5: item.vitamine_B5 || 0,
+              B6: item.vitamine_B6 || 0,
+              B9: item.vitamine_B9 || 0,
+              B12: item.vitamine_B12 || 0,
+              D: item.vitamine_D || 0,
+              E: item.vitamine_E || 0,
+              K1: item.vitamine_K1 || 0,
+              retinol: item.retinol || 0,
+              beta_carotene: item.beta_carotene || 0
+            },
+            mineraux: {
+              calcium: item.calcium || 0,
+              fer: item.fer || 0,
+              magnesium: item.magnesium || 0,
+              phosphore: item.phosphore || 0,
+              potassium: item.potassium || 0,
+              sodium: item.sodium || 0
+            }
+          }))
+        ),
+        shareReplay(1), // Mise en cache pour éviter les requêtes répétées
         catchError(error => {
           console.error('Erreur lors du chargement des ingrédients:', error);
-          return of([]);
+          return of([]); // Retourne une liste vide en cas d'erreur
         })
       );
     }
@@ -37,9 +71,16 @@ export class NutritionService {
   }
   
   ajouterNouvelIngredient(nom: string): Observable<Ingredient> {
-    // Logique pour appeler USDA et créer un nouvel ingrédient si trouvé
-
-    // Temporairement renvoie un ingrédient par défaut
-    return of({ nom, calories: 0, proteines: 0, glucides: 0, lipides: 0 });
+    return of({
+      id: '', // Id temporaire ou une chaîne vide
+      nom,
+      calories: 0,
+      proteines: 0,
+      glucides: 0,
+      lipides: 0,
+      fibres: 0, // Par défaut
+      vitamines: {}, // Objet vide pour les vitamines
+      mineraux: {},  // Objet vide pour les minéraux
+    });
   }
 }
