@@ -29,7 +29,7 @@
     <!-- Champ Ingrédients -->
     <div class="mb-3">
       <label for="ingredients" class="form-label">Ingrédients</label>
-      <div class="ingredient-section">
+      <!-- <div class="ingredient-section">
         <label for="ingredient-search">Ajouter un ingrédient :</label>
         <input id="ingredient-search" [(ngModel)]="ingredientRecherche" (input)="rechercherIngredient()" placeholder="Rechercher un ingrédient" />
       
@@ -43,7 +43,29 @@
         </ul>
       
         <button type="button" (click)="ajouterNouvelIngredient()">Nouvel ingrédient</button>
+      </div> -->
+      <div class="ingredient-section">
+        <label for="ingredient-search">Ajouter un ingrédient :</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="ingredientRecherche"
+          name="ingredientRecherche"
+          (input)="rechercherIngredient()"
+          placeholder="Recherchez un ingrédient"
+        />
+      
+        <ul class="suggestions" *ngIf="suggestions.length > 0">
+          <li *ngFor="let suggestion of suggestions" (click)="ajouterIngredient(suggestion, +quantiteInput.value, uniteInput.value)">
+            {{ suggestion.nom }}
+          </li>
+          <input #quantiteInput type="number" placeholder="Quantité" />
+          <input #uniteInput type="text" placeholder="Unité (ex. g, ml)" />
+        </ul>
+
+        <button type="button" (click)="ajouterNouvelIngredient()">Ajouter l'ingrédient</button>
       </div>
+      
       
       <ul class="ingredient-list">
         <li *ngFor="let ingredient of nouvelleRecette.ingredients">

@@ -44,6 +44,7 @@ export class RecetteFormComponent implements OnInit {
   };
   ingredientRecherche = ''; // Recherche en cours dans le champ
   suggestions: Ingredient[] = []; // Liste des suggestions
+  ingredientsDisponibles: Ingredient[] = []; // Variable manquante ajoutée
   editMode = false; // Pour savoir si on est en mode édition
   recetteId?: string;
   messageConfirmation: string = '';
@@ -57,6 +58,11 @@ export class RecetteFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.nutritionService.getIngredients().subscribe(ingredients => {
+      this.ingredientsDisponibles = ingredients;
+      this.suggestions = [...this.ingredientsDisponibles]; // Initialisation des suggestions
+    });
+
     this.categories = this.categorieService.obtenirCategories();
 
     // Récupère l'ID de la recette à partir de l'URL (s'il est présent)
@@ -158,10 +164,12 @@ export class RecetteFormComponent implements OnInit {
     return Date.now().toString();
   }
 
-  rechercherIngredient() {
-    this.nutritionService.rechercherIngredient(this.ingredientRecherche).subscribe((results: Ingredient[]) => {
-      this.suggestions = results;
-    });
+  rechercherIngredient(): void {
+    const termeRecherche = this.ingredientRecherche.toLowerCase();
+console.log("appel de rechIngredient avec : "+termeRecherche);
+    this.suggestions = this.ingredientsDisponibles.filter(ingredient =>
+      ingredient.nom.toLowerCase().includes(termeRecherche)
+    );
   }
 
   ajouterIngredient(ingredientRef: Ingredient, quantite: number, unite: string) {
