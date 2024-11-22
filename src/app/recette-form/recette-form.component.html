@@ -31,21 +31,6 @@
       <label for="ingredients" class="form-label">Ingrédients</label>
       <!-- <div class="ingredient-section">
         <label for="ingredient-search">Ajouter un ingrédient :</label>
-        <input id="ingredient-search" [(ngModel)]="ingredientRecherche" (input)="rechercherIngredient()" placeholder="Rechercher un ingrédient" />
-      
-        <ul *ngIf="suggestions.length > 0">
-          <li *ngFor="let suggestion of suggestions" 
-          (click)="ajouterIngredient(suggestion, +quantiteInput.value, uniteInput.value)">
-            {{ suggestion.nom }}
-          </li>
-          <input #quantiteInput type="number" placeholder="Quantité" />
-          <input #uniteInput type="text" placeholder="Unité (ex. g, ml)" />
-        </ul>
-      
-        <button type="button" (click)="ajouterNouvelIngredient()">Nouvel ingrédient</button>
-      </div> -->
-      <div class="ingredient-section">
-        <label for="ingredient-search">Ajouter un ingrédient :</label>
         <input
           type="text"
           class="form-control"
@@ -64,7 +49,44 @@
         </ul>
 
         <button type="button" (click)="ajouterNouvelIngredient()">Ajouter l'ingrédient</button>
+      </div> -->
+      <div class="ingredient-input">
+        <input
+          type="text"
+          [(ngModel)]="ingredientRecherche"
+          (input)="rechercherIngredient()"
+          placeholder="Recherchez un ingrédient"
+          name="ingredientRecherche"
+          required
+        />
+      
+        <!-- Liste des suggestions -->
+        <ul class="suggestions" *ngIf="suggestions.length > 0">
+          <li *ngFor="let suggestion of suggestions" (click)="ajouterIngredient(suggestion, +quantiteInput.value, uniteInput.value)">
+            {{ suggestion.nom }}
+          </li>
+        </ul>
       </div>
+      
+      <div class="ingredient-details">
+        <input
+          type="number"
+          [(ngModel)]="quantite"
+          placeholder="Quantité"
+          name="quantite"
+          required
+        />
+        <select [(ngModel)]="unite" name="unite" required>
+          <option value="" disabled>Unité</option>
+          <option value="g">g</option>
+          <option value="kg">kg</option>
+          <option value="ml">ml</option>
+          <option value="L">L</option>
+          <option value="pcs">pcs</option>
+        </select>
+        <button (click)="ajouterIngredientManuel()">Ajouter</button>
+      </div>
+      
       
       
       <ul class="ingredient-list">

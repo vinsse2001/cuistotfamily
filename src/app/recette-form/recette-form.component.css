@@ -36,3 +36,27 @@ textarea.ng-invalid.ng-touched {
 .suggestions li:hover {
   background-color: #f0f0f0; /* Couleur au survol */
 }
+
+.ingredient-input {
+  margin-bottom: 10px;
+}
+
+.ingredient-details {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.ingredient-details input,
+.ingredient-details select {
+  flex: 1;
+  padding: 5px;
+  font-size: 1rem;
+}
+
+.ingredient-details button {
+  padding: 5px 10px;
+  font-size: 1rem;
+  cursor: pointer;
+}
