@@ -18,23 +18,19 @@ textarea.ng-invalid.ng-touched {
 
 .suggestions {
   list-style-type: none;
-  margin: 0;
   padding: 0;
-  max-height: 150px;
-  overflow-y: auto; /* Ajoute un ascenseur si trop d'éléments */
   border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #fff;
+  max-height: 150px;
+  overflow-y: auto;
 }
 
 .suggestions li {
-  padding: 10px;
+  padding: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
 }
 
 .suggestions li:hover {
-  background-color: #f0f0f0; /* Couleur au survol */
+  background-color: #f0f0f0;
 }
 
 .ingredient-input {
