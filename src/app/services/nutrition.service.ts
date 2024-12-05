@@ -8,7 +8,7 @@ import { Ingredient } from '../models/ingredient.model';
   providedIn: 'root'
 })
 export class NutritionService {
-  private readonly ingredientsUrl = 'data/ingredients.json';
+  private readonly ingredientsUrl = 'data/ingredients_updated.json';
   private ingredientsCache$?: Observable<Ingredient[]>;
 
   constructor(private http: HttpClient) {}
