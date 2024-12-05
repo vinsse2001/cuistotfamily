@@ -9,7 +9,6 @@ import { IngredientCourant } from '../models/ingredientcourant.model';
   providedIn: 'root'
 })
 export class NutritionService {
-  private readonly ingredientsUrl = 'data/ingredients_updated.json';
   private ingredientsCache$?: Observable<Ingredient[]>;
   private apiUrl = 'http://localhost:3000/api/ingredients-courants';
 
@@ -26,7 +25,7 @@ export class NutritionService {
   // Charge et met en cache les ingrédients pré-enregistrés dans l'appli (avec infos nutritionnelles) pour éviter les requêtes répétées
   getIngredients(): Observable<Ingredient[]> {
     if (!this.ingredientsCache$) {
-      this.ingredientsCache$ = this.http.get<any[]>(this.ingredientsUrl).pipe(
+      this.ingredientsCache$ = this.http.get<any[]>(this.apiUrl).pipe(
         map(data =>
           data.map(item => ({
             id: item.id.toString(),
