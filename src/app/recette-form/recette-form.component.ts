@@ -48,6 +48,9 @@ export class RecetteFormComponent implements OnInit {
   editMode = false; // Pour savoir si on est en mode édition
   recetteId?: string;
   messageConfirmation: string = '';
+  ingredientSelectionne: Ingredient | null = null;
+  quantite: number = 0;
+  unite: string = '';
 
   constructor(
     private recetteService: RecetteService,
@@ -165,27 +168,63 @@ export class RecetteFormComponent implements OnInit {
   }
 
   rechercherIngredient(): void {
-    const termeRecherche = this.ingredientRecherche.toLowerCase();
-console.log("appel de rechIngredient avec : "+termeRecherche);
-    this.suggestions = this.ingredientsDisponibles.filter(ingredient =>
-      ingredient.nom.toLowerCase().includes(termeRecherche)
-    );
-  }
-
-  ajouterIngredient(ingredientRef: Ingredient, quantite: number, unite: string) {
-    if (!ingredientRef.id) {
-      console.error("L'ingrédient doit avoir un ID valide pour être ajouté.");
+    if (this.ingredientRecherche.trim() === '') {
+      this.suggestions = [];
       return;
     }
-
-    this.nouvelleRecette.ingredients.push({
-      ingredientId: ingredientRef.id,
-      quantite,
-      unite
+  
+    this.nutritionService.rechercherIngredient(this.ingredientRecherche).subscribe({
+      next: (ingredients) => {
+        this.suggestions = ingredients;
+      },
+      error: (err) => {
+        console.error('Erreur lors de la recherche d\'ingrédients:', err);
+        this.suggestions = [];
+      },
     });
+  }
+  
+  validerIngredient(ingredient: Ingredient): void {
+    this.ingredientSelectionne = ingredient;
+    this.ingredientRecherche = ''; // Réinitialise le champ de recherche
+    this.suggestions = []; // Vide la liste des suggestions
+  }
 
-    this.ingredientRecherche = ''; // Réinitialise la recherche
-    this.suggestions = []; // Vide les suggestions
+  // ajouterIngredient(ingredientRef: Ingredient, quantite: number, unite: string) {
+  //   if (!ingredientRef.id) {
+  //     console.error("L'ingrédient doit avoir un ID valide pour être ajouté.");
+  //     return;
+  //   }
+
+  //   this.nouvelleRecette.ingredients.push({
+  //     ingredientId: ingredientRef.id,
+  //     quantite,
+  //     unite
+  //   });
+
+  //   this.ingredientRecherche = ''; // Réinitialise la recherche
+  //   this.suggestions = []; // Vide les suggestions
+  // }
+
+  ajouterIngredient(): void {
+    if (!this.ingredientSelectionne || this.quantite <= 0 || !this.unite) {
+      alert('Veuillez remplir tous les champs avant d’ajouter un ingrédient.');
+      return;
+    }
+  
+    const ingredient: RecetteIngredient = {
+      ingredientId: this.ingredientSelectionne.id || '',
+      nom: this.ingredientSelectionne.nom,
+      quantite: this.quantite,
+      unite: this.unite,
+    };
+  
+    this.nouvelleRecette.ingredients.push(ingredient);
+  
+    // Réinitialiser les champs pour un nouvel ajout
+    this.ingredientSelectionne = null;
+    this.quantite = 0;
+    this.unite = '';
   }
 
     // Logique pour ajouter un nouvel ingrédient non trouvé dans la base
@@ -193,11 +232,27 @@ console.log("appel de rechIngredient avec : "+termeRecherche);
     this.nutritionService.ajouterNouvelIngredient(this.ingredientRecherche)
       .subscribe((ingredient: Ingredient) => {
         if (ingredient && ingredient.id) {
-          this.ajouterIngredient(ingredient, 1, '');
+          this.ajouterIngredient();
         } else {
           console.error("L'ingrédient n'a pas pu être ajouté car il manque un ID.");
         }
       });
+  }
+
+  ajouterIngredientCourant() {
+    const ingredient: IngredientCourant = {
+      id: this.ingredientSelectionne.id,
+      nom: this.nomSimplifie,
+    };
+  
+    this.ingredientCourantService.ajouterIngredientCourant(ingredient).subscribe(
+      () => {
+        console.log('Ingrédient ajouté aux ingrédients courants');
+      },
+      (error) => {
+        console.error('Erreur lors de l\'ajout de l\'ingrédient courant :', error);
+      }
+    );
   }
 
   afficherMessageConfirmation(message: string) {

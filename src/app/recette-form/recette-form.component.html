@@ -51,6 +51,7 @@
         <button type="button" (click)="ajouterNouvelIngredient()">Ajouter l'ingrédient</button>
       </div> -->
       <div class="ingredient-input">
+        <!-- Étape 1 : Recherche d'un ingrédient -->
         <input
           type="text"
           [(ngModel)]="ingredientRecherche"
@@ -59,16 +60,18 @@
           name="ingredientRecherche"
           required
         />
-      
+
         <!-- Liste des suggestions -->
         <ul class="suggestions" *ngIf="suggestions.length > 0">
-          <li *ngFor="let suggestion of suggestions" (click)="ajouterIngredient(suggestion, +quantiteInput.value, uniteInput.value)">
+          <li *ngFor="let suggestion of suggestions" (click)="validerIngredient(suggestion)">
             {{ suggestion.nom }}
           </li>
         </ul>
       </div>
       
-      <div class="ingredient-details">
+      <!-- Étape 2 : Définir quantité et unité une fois l'ingrédient sélectionné -->
+      <div class="ingredient-details" *ngIf="ingredientSelectionne">
+        <p>Ingrédient sélectionné : <strong>{{ ingredientSelectionne.nom }}</strong></p>
         <input
           type="number"
           [(ngModel)]="quantite"
@@ -84,9 +87,8 @@
           <option value="L">L</option>
           <option value="pcs">pcs</option>
         </select>
-        <button (click)="ajouterIngredientManuel()">Ajouter</button>
-      </div>
-      
+        <button (click)="ajouterIngredient()">Ajouter</button>
+      </div>      
       
       
       <ul class="ingredient-list">
