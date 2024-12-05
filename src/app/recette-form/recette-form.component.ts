@@ -9,6 +9,7 @@ import { CategorieService } from '../services/categorie.service';
 import { NutritionService } from '../services/nutrition.service';
 import { Ingredient } from '../models/ingredient.model';
 import { RecetteIngredient } from '../models/recetteingredient.model';
+import { IngredientCourant } from '../models/ingredientcourant.model';
 
 interface NouvelleRecetteForm {
   titre: string;
@@ -51,6 +52,7 @@ export class RecetteFormComponent implements OnInit {
   ingredientSelectionne: Ingredient | null = null;
   quantite: number = 0;
   unite: string = '';
+  nomSimplifie: string = '';
 
   constructor(
     private recetteService: RecetteService,
@@ -190,22 +192,6 @@ export class RecetteFormComponent implements OnInit {
     this.suggestions = []; // Vide la liste des suggestions
   }
 
-  // ajouterIngredient(ingredientRef: Ingredient, quantite: number, unite: string) {
-  //   if (!ingredientRef.id) {
-  //     console.error("L'ingrédient doit avoir un ID valide pour être ajouté.");
-  //     return;
-  //   }
-
-  //   this.nouvelleRecette.ingredients.push({
-  //     ingredientId: ingredientRef.id,
-  //     quantite,
-  //     unite
-  //   });
-
-  //   this.ingredientRecherche = ''; // Réinitialise la recherche
-  //   this.suggestions = []; // Vide les suggestions
-  // }
-
   ajouterIngredient(): void {
     if (!this.ingredientSelectionne || this.quantite <= 0 || !this.unite) {
       alert('Veuillez remplir tous les champs avant d’ajouter un ingrédient.');
@@ -239,15 +225,21 @@ export class RecetteFormComponent implements OnInit {
       });
   }
 
-  ajouterIngredientCourant() {
-    const ingredient: IngredientCourant = {
+  ajouterIngredientCourant(): void {
+    if (!this.ingredientSelectionne) {
+      console.error("Aucun ingrédient sélectionné.");
+      return;
+    }
+
+    const ingredientCourant: IngredientCourant = {
       id: this.ingredientSelectionne.id,
-      nom: this.nomSimplifie,
+      nom: this.ingredientSelectionne.nom,
+      nomSimplifie: this.nomSimplifie
     };
   
-    this.ingredientCourantService.ajouterIngredientCourant(ingredient).subscribe(
+    this.nutritionService.ajouterIngredientCourant(ingredientCourant).subscribe(
       () => {
-        console.log('Ingrédient ajouté aux ingrédients courants');
+        console.log('Ingrédient ajouté aux ingrédients courants : ${ingredientCourant.nomSimplifie}');
       },
       (error) => {
         console.error('Erreur lors de l\'ajout de l\'ingrédient courant :', error);

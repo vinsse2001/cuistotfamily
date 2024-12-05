@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, catchError, shareReplay } from 'rxjs/operators';
 import { Ingredient } from '../models/ingredient.model';
+import { IngredientCourant } from '../models/ingredientcourant.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,17 @@ import { Ingredient } from '../models/ingredient.model';
 export class NutritionService {
   private readonly ingredientsUrl = 'data/ingredients_updated.json';
   private ingredientsCache$?: Observable<Ingredient[]>;
+  private apiUrl = 'http://localhost:3000/api/ingredients-courants';
 
   constructor(private http: HttpClient) {}
+
+  getIngredientsCourants(): Observable<IngredientCourant[]> {
+    return this.http.get<IngredientCourant[]>(this.apiUrl);
+  }
+
+  ajouterIngredientCourant(ingredient: IngredientCourant): Observable<any> {
+    return this.http.post(this.apiUrl, ingredient);
+  }
 
   // Charge et met en cache les ingrédients pré-enregistrés dans l'appli (avec infos nutritionnelles) pour éviter les requêtes répétées
   getIngredients(): Observable<Ingredient[]> {
