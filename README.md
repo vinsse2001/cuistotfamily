@@ -15,6 +15,9 @@
 ## Description du Projet
 **CuistotFamily** est une application web permettant de gérer des recettes de cuisine. Elle offre des fonctionnalités pour créer, consulter, modifier et partager des recettes, ainsi que pour calculer les informations nutritionnelles basées sur la base de données **CIQUAL**. L'application est conçue pour être **responsive**, **conviviale** et **accessible**.
 
+### Note sur le Dossier `_archives`
+Le dossier `_archives` contient un **premier test de développement** effectué avec ChatGPT. Il **n'est pas à prendre en compte** pour le développement actuel du projet. Ce dossier est conservé à titre de référence uniquement.
+
 ---
 
 ## Fonctionnalités
