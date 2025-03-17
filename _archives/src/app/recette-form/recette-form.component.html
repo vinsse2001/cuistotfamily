@@ -63,9 +63,18 @@
 
         <!-- Liste des suggestions -->
         <ul class="suggestions" *ngIf="suggestions.length > 0">
-          <li *ngFor="let suggestion of suggestions" (click)="validerIngredient(suggestion)">
+          <!-- <li *ngFor="let suggestion of suggestions" (click)="validerIngredient(suggestion)">
             {{ suggestion.nom }}
-          </li>
+          </li> -->
+          <div *ngFor="let result of suggestions">
+            <div *ngIf="result.source === 'courants'" class="ingredient-courant">
+              {{ result.ingredient.nomSimplifie }}
+            </div>
+            <div *ngIf="result.source === 'complets'" class="ingredient-complet">
+              {{ result.ingredient.nom }}
+            </div>
+          </div>
+          
         </ul>
       </div>
       

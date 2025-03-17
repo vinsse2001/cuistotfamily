@@ -16,22 +16,40 @@ textarea.ng-invalid.ng-touched {
   box-shadow: 0 0 5px rgba(255, 107, 107, 0.5);
 }
 
-.suggestions {
+/* .suggestions {
   list-style-type: none;
   padding: 0;
   border: 1px solid #ccc;
   max-height: 150px;
   overflow-y: auto;
+} */
+.suggestions {
+  border: 1px solid #ccc;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: #fff;
+  position: absolute;
+  z-index: 1000;
 }
 
-.suggestions li {
+.suggestion-item {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.suggestion-item:hover {
+  background-color: #f0f0f0;
+}
+
+
+/* .suggestions li {
   padding: 5px;
   cursor: pointer;
 }
 
 .suggestions li:hover {
   background-color: #f0f0f0;
-}
+} */
 
 .ingredient-input {
   margin-bottom: 10px;
@@ -55,4 +73,13 @@ textarea.ng-invalid.ng-touched {
   padding: 5px 10px;
   font-size: 1rem;
   cursor: pointer;
+}
+
+.ingredient-courant {
+  font-weight: bold;
+  color: green;
+}
+
+.ingredient-complet {
+  color: gray;
 }

@@ -169,23 +169,41 @@ export class RecetteFormComponent implements OnInit {
     return Date.now().toString();
   }
 
+  // rechercherIngredient(): void {
+  //   if (this.ingredientRecherche.trim() === '') {
+  //     this.suggestions = [];
+  //     return;
+  //   }
+  
+  //   this.nutritionService.rechercherIngredient(this.ingredientRecherche).subscribe({
+  //     next: (ingredients) => {
+  //       this.suggestions = ingredients;
+  //     },
+  //     error: (err) => {
+  //       console.error('Erreur lors de la recherche d\'ingrédients:', err);
+  //       this.suggestions = [];
+  //     },
+  //   });
+  // }
+
   rechercherIngredient(): void {
-    if (this.ingredientRecherche.trim() === '') {
-      this.suggestions = [];
-      return;
+    console.log('Ingrédient recherché = '+this.ingredientRecherche);
+    if (this.ingredientRecherche.trim()) {
+      this.nutritionService.rechercherIngredient(this.ingredientRecherche)
+        .subscribe(
+          (ingredients: Ingredient[]) => {
+            this.suggestions = ingredients; // Met à jour les suggestions
+            console.log('suggestions = '+this.suggestions);
+          },
+          error => {
+            console.error('Erreur lors de la recherche des ingrédients:', error);
+          }
+        );
+    } else {
+      this.suggestions = []; // Vide les suggestions si aucune recherche
     }
-  
-    this.nutritionService.rechercherIngredient(this.ingredientRecherche).subscribe({
-      next: (ingredients) => {
-        this.suggestions = ingredients;
-      },
-      error: (err) => {
-        console.error('Erreur lors de la recherche d\'ingrédients:', err);
-        this.suggestions = [];
-      },
-    });
   }
-  
+    
   validerIngredient(ingredient: Ingredient): void {
     this.ingredientSelectionne = ingredient;
     this.ingredientRecherche = ''; // Réinitialise le champ de recherche
