@@ -1,0 +1,47 @@
+Notes sur les points à intégrer à Cuistot Family, dans le désordre (et remis dans l'ordre par l'IA, dans le readme.md), reste à vérifier si tout a bien été pris en compte dans le readme.md, afin de le suivre étape par étape.
+----------------
+
+- dev avec Angular, bootstrap pour le front, et ??? pour le back ? et quelle base de données ?
+- déploiement sur o2switch
+- application web responsive et conviviale, dans un premier temps uniquement web, mais peut-être à convertir en application mobile dans le futur, donc prévoir que ce soit facile
+- mode clair, sombre, et contrasté (normes handicapé ?)
+- application de recettes de cuisine, prenant les qualités des sites existants, corrigeant les défauts,
+- possibilité de faire un don à l'auteur, (fonction non prioritaire),
+- sans pub, mais pourquoi pas créer une page "je veux de la pub !" qui afficherait plein de pubs ? uniquement si l'utilisateur clique dessus volontairement ?
+- pouvoir consulter les recettes, d'abord par photo, puis en amenant la souris sur la photo, on voit un aperçu, puis en cliquant sur la photo, on voit le détail,
+- pouvoir filtrer les recettes, pour ne voir que celles qu'on a ajoutées, ou ses favoris,
+- pouvoir filtrer sur un mot clé (qui serait dans le titre, ou la description, ou un ingrédient),
+- pouvoir ajouter une ou plusieurs images à la recette,
+- réduire automatiquement la taille des images uploadées, pour une taille raisonnable, adaptée web ou mobile,
+- proposer sur la page d'accueil une recette au hasard ? non prioritaire, peut-être as-tu une meilleure idée pour la page d'accueil, des gros boutons faciles pour démarrer l'appli, aller à l'essentiel ?
+- pouvoir créer une recette, avec un titre, un sous titre (optionnel), une durée (optionnel), une idée du prix (bon marché ou cher, optionnel), une idée de la difficulté (optionnel), une photo, une liste d'ingrédients (à choisir dans une liste pré-définie, ou ajouter un ingrédient si non trouvé), les étapes de la recette,
+- pouvoir imprimer la recette avec un format propre, en 1 seule page,
+- pouvoir avoir des informations nutritionnelles sur la recette, en s'appuyant par ex sur le site ciqual (qui fournit un export des ingrédients au format excel, il faudrait alors en extraire les informations utiles : nom de l'ingrédient, avec possibilité de le renommer pour avoir un libellé plus court ou commun, récupération des vitamines minéraux nutriments, stockage en base),
+- avoir un logo,
+- choisir un nom de domaine,
+- déposer tout le code sur un repository git public, à partager avec l'IA,
+- l'idée est plutôt de stocker les recettes qui nous intéressent, et non d'avoir une base de pleins de recettes des autres,
+- pouvoir noter une recette,
+- pouvoir choisir entre afficher uniquement sa propre note sur la recette, ou la notation de l'ensemble des utilisateur, ou que des amis, ou les 2 (sa propre note et celle des autres),
+- pouvoir l'ajouter à ses favoris,
+- pouvoir modifier une recette : soit on est le créateur, et la modif est visible par tous, soit on modifie une recette de quelqu'un d'autre, dans ce cas, la recette originale reste inchangée, par contre on a une copie (clone) de la recette, modifiée, et on peut voir les 2 versions (afficher le nom ou pseudo de la personne),
+- pouvoir supprimer une recette, soit pour tous (plus personne n'y a accès, sauf les personnes qui l'ont clonée et modifiée), soit uniquement pour soi (revient à masquer la recette ?)
+- pas de commentaire sur les recette,
+- gestion des utilisateurs : pouvoir créer son compte (avec vérification du mail, ou autre solution de compte facile à créer tout en restant sûr), indiquer un pseudo (autorisant les espaces, si on veut mettre par ex nom prénom), un champ description (optionnel), pouvoir supprimer ou désactiver son compte (ce qui ne supprime pas les recettes), pouvoir modifier son pseudo et/ou sa description, modifier son mail (avec reconfirmation),
+- pouvoir faire connaître l'application en 1 clic,
+- pouvoir partager une recette,
+- pouvoir partager toutes ses propres recettes,
+- pouvoir modifier le nombre de personnes de la recette, ce qui change alors dynamiquement les quantités d'ingrédients,
+- pouvoir mettre un tag sur la recette pour la catégoriser (tags existants : entrée, plat principal, dessert)
+- pouvoir associer des recettes pour faire un menu soi-même, associé à un thème (végé, ...)
+- pouvoir ajouter un lien externe à la recette (source sur un autre site), ou la référence d'un livre avec la page,
+- pouvoir mettre une photo sur son profil
+- quand je recherche une recette, il me suffit de commencer à taper un nom ou ingrédient et après une petite temporisation, mes résultats s'affichent
+- pouvoir renommer un utilisateur (par ex : "Odette" en "mamie Dedette"), sans que cela change le pseudo de la personne, mais juste notre affichage
+- je peux avoir plusieurs critères dans ma recherche, par ex cocher un ou plusieurs tags ("entrée", "plat", "végé"), et/ou un nom d'utilisateur et taper un ingrédient
+- pouvoir partager l'ensemble des recettes d'une personne (par ex, proposer à quelqu'un "les recettes de mon papa")
+- afficher de façon synthétique (et optionnelle, sur la recette comme sur l'impression) les informations nutritionnelles
+- ajouter en bas de page des impressions recettes le nom du site, la version de la recette, l'auteur originale, et si elle est modifiée
+- pouvoir mettre un chrono où on clique quand on attaque l'étape suivante, pour mesurer le temps réel pour faire la recette, et cela calcule notre moyenne (ou celle de l'ensemble des personnes), met à jour le temps de la recette,
+- pouvoir choisir si on partage la recette avec tous, ou uniquement un cercle fermé,
+- pouvoir définir un groupe d'utilisateurs (par ex : "famille", "amis")
