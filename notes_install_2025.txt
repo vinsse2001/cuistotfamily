@@ -1,0 +1,14 @@
+Notes d'init / install de Cuistot Family (juillet 2025)
+-------------------------------------------------------
+-- vérif des logiciels installés et versions
+node v20.18.0
+npm v10.8.2
+chocolatey v2.3.0
+Angular CLI : 19.2.5
+git version 2.28.0.windows.1
+VSS : v1.102.3
+
+-- créa du projet Angular 
+ng new cuistotfamily --style=scss --routing=false
+cd cuistotfamily
+ng serve
