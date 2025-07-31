@@ -62,7 +62,7 @@ Le dossier `_archives` contient un **premier test de développement** effectué 
 - **Langage** : TypeScript
 
 ### Backend
-- **Framework** : NestJS
+- **Framework** : NestJS ([compatible sur o2switch](https://faq.o2switch.fr/hebergement-mutualise/tutoriels-cpanel/app-nodejs))
 - **Langage** : TypeScript
 - **Base de Données** : PostgreSQL
 - **ORM** : TypeORM
