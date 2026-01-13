@@ -41,6 +41,7 @@ Attends mon retour après chaque série de commandes avant de passer à la suite
 
 ## Installation de l'environnement de dév
 (janvier 2026)
+- vidage du repository github, connexion par SSH (recréation d'une clé et mise à jour de l'url de connexion : `git remote set-url origin git@github.com:vinsse2001/cuistotfamily.git`)
 - **WSL** (déjà installé, je m'étais appuyé sur la doc https://blog.sciam.fr/2024/09/13/env-quarkus-wsl.html)
     - install WSL : `wsl --install`
     - màj Ubuntu : `sudo apt update && sudo apt -y upgrade`
