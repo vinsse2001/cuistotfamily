@@ -42,10 +42,12 @@ Attends mon retour après chaque série de commandes avant de passer à la suite
 ## Installation de l'environnement de dév
 (janvier 2026)
 - vidage du repository github, connexion par SSH (recréation d'une clé et mise à jour de l'url de connexion : `git remote set-url origin git@github.com:vinsse2001/cuistotfamily.git`)
+- **Visual Studio Code**
 - **WSL** (déjà installé, je m'étais appuyé sur la doc https://blog.sciam.fr/2024/09/13/env-quarkus-wsl.html)
     - install WSL : `wsl --install`
     - màj Ubuntu : `sudo apt update && sudo apt -y upgrade`
     - install zip : `sudo apt install zip unzip`
 - **Windows Terminal** (déjà installé), pour faciliter le fait d’avoir plusieurs terminals (plusieurs onglets), et changement des couleurs (paramètres) pour avoir un thème lisible
+- récupération du repo GIT sur WSL, puis connexion de VS Code par remote
 - **NestJS CLI** (déjà installé) : `npm install -g @nestjs/cli`
 
