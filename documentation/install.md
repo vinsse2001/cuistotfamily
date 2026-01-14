@@ -42,12 +42,39 @@ Attends mon retour après chaque série de commandes avant de passer à la suite
 ## Installation de l'environnement de dév
 (janvier 2026)
 - vidage du repository github, connexion par SSH (recréation d'une clé et mise à jour de l'url de connexion : `git remote set-url origin git@github.com:vinsse2001/cuistotfamily.git`)
-- **Visual Studio Code**
 - **WSL** (déjà installé, je m'étais appuyé sur la doc https://blog.sciam.fr/2024/09/13/env-quarkus-wsl.html)
     - install WSL : `wsl --install`
     - màj Ubuntu : `sudo apt update && sudo apt -y upgrade`
     - install zip : `sudo apt install zip unzip`
 - **Windows Terminal** (déjà installé), pour faciliter le fait d’avoir plusieurs terminals (plusieurs onglets), et changement des couleurs (paramètres) pour avoir un thème lisible
-- récupération du repo GIT sur WSL, puis connexion de VS Code par remote
-- **NestJS CLI** (déjà installé) : `npm install -g @nestjs/cli`
+- **NestJS CLI** et **Angular CLI** : `npm install -g @nestjs/cli @angular/cli` 
+- **Node JS** :
+    - `sudo apt install nodejs` (mais apparemment inutile, car installe ancienne version)
+    - `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash`
+    - `\. "$HOME/.nvm/nvm.sh"`
+    - `nvm install 24`
+- init backend avec NestJS : `nest new cuistot-family-api` (choisir npm)
+- init frontend Angular : `ng new cuistot-family-client --standalone --style=css --ssr=false` (on désactive le SSR, inutile ici, car pas besoin de référencement pour l'application, ni de hautes performances pour le 1er affichage de page ou les suivantes)
+- install **PostGreSQL**, puis démarrage du service et création de la base de données :
+    - `sudo apt update`
+    - `sudo apt install postgresql postgresql-contrib`
+    - `sudo service postgresql start`
+    - `sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'admin';"` (le mot de passe du user postgres local est "admin")
+    - `sudo -u postgres psql -c "CREATE USER cuistot WITH PASSWORD 'cuistot' SUPERUSER;"` (on crée un user "cuistot", mdp id)
+    - `sudo -u postgres psql -c "CREATE DATABASE cuistotfamily OWNER cuistot;"`
+- création d'alias cdapi et cdcli :
+    - `vi ~/.bash_aliases`
+    - y insérer les 2 lignes :
+      - `alias cdapi='cd ~/dev/cuistotfamily/cuistot-family-api'`
+      - `alias cdcli='cd ~/dev/cuistotfamily/cuistot-family-client'`
+    - et lancer ce script depuis le .bashrc, en y ajoutant `. ~/.bash_aliases`
 
+## Démarrage environnement de dév
+- ouvrir Windows Terminal, puis un nouvel onglet Ubuntu
+- `cd ~/dev/cuistotfamily` et taper `code .` pour lancer VS Code Windows, ouvert en remote
+- démarrer le backend : `cd cuistot-family-api` puis `npm run start:dev`
+- démarrer le front (dans un nouvel onglet ubuntu) : `cd ~/dev/cuistotfamily/cuistot-family-client` puis `npm run start`
+
+## Création du code
+- install des dépendances dans l'api : `cdapi` puis `npm install @nestjs/typeorm typeorm pg`
+- puis création CRUD Recettes (recipes) : `nest generate resource recipes` (choisir REST API, et yes pour les options)
