@@ -57,7 +57,7 @@ Attends mon retour après chaque série de commandes avant de passer à la suite
 - init frontend Angular : `ng new cuistot-family-client --standalone --style=css --ssr=false` (on désactive le SSR, inutile ici, car pas besoin de référencement pour l'application, ni de hautes performances pour le 1er affichage de page ou les suivantes)
 - install **PostGreSQL**, puis démarrage du service et création de la base de données :
     - `sudo apt update`
-    - `sudo apt install postgresql postgresql-contrib`
+    - `sudo apt install postgresql postgresql-contrib` (vérifier que le propriétaire du dossier /var/run/postgresql est bien postgresql, sinon : `sudo chown postgres:postgres /var/run/postgresql`puis `sudo chmod 2775 /var/run/postgresql`)
     - `sudo service postgresql start`
     - `sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';"` (le mot de passe du user 'postgres' local est 'postgres')
     - `sudo -u postgres psql -c "CREATE USER cuistot WITH PASSWORD 'cuistot' SUPERUSER;"` (on crée un user "cuistot", mdp id)
