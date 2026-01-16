@@ -59,7 +59,7 @@ Attends mon retour après chaque série de commandes avant de passer à la suite
     - `sudo apt update`
     - `sudo apt install postgresql postgresql-contrib`
     - `sudo service postgresql start`
-    - `sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'admin';"` (le mot de passe du user postgres local est "admin")
+    - `sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';"` (le mot de passe du user 'postgres' local est 'postgres')
     - `sudo -u postgres psql -c "CREATE USER cuistot WITH PASSWORD 'cuistot' SUPERUSER;"` (on crée un user "cuistot", mdp id)
     - `sudo -u postgres psql -c "CREATE DATABASE cuistotfamily OWNER cuistot;"`
 - création d'alias cdapi et cdcli :
